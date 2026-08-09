@@ -139,6 +139,24 @@
     font-size: 0.8rem;
     color: #4a7a55;
   }
+  #music-toggle {
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    padding: 0.6rem 1.1rem;
+    font-size: 0.85rem;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(57, 255, 20, 0.3);
+  }
+  #music-toggle:hover {
+    background: rgba(57, 255, 20, 0.15);
+  }
 </style>
 </head>
 <body>
@@ -179,6 +197,9 @@
     <footer>&copy; 2026 Guido Rico</footer>
   </main>
 
+  <button id="music-toggle" type="button">&#9658; Play Music</button>
+  <iframe id="yt-audio" title="Background music" style="position:absolute;width:0;height:0;border:0;" allow="autoplay"></iframe>
+
   <script>
     (function () {
       var canvas = document.getElementById('matrix-rain');
@@ -215,6 +236,25 @@
         }
       }
       setInterval(draw, 45);
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var btn = document.getElementById('music-toggle');
+      var frame = document.getElementById('yt-audio');
+      var playing = false;
+      var src = 'https://www.youtube.com/embed/m3stLwd1CnQ?list=RDm3stLwd1CnQ&autoplay=1&playsinline=1';
+      btn.addEventListener('click', function () {
+        if (!playing) {
+          frame.src = src;
+          btn.innerHTML = '&#10074;&#10074; Pause Music';
+        } else {
+          frame.src = '';
+          btn.innerHTML = '&#9658; Play Music';
+        }
+        playing = !playing;
+      });
     })();
   </script>
 </body>
