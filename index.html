@@ -245,15 +245,41 @@
       var frame = document.getElementById('yt-audio');
       var playing = false;
       var src = 'https://www.youtube.com/embed/m3stLwd1CnQ?list=RDm3stLwd1CnQ&autoplay=1&playsinline=1';
+
+      function start() {
+        if (playing) return;
+        frame.src = src;
+        btn.innerHTML = '&#10074;&#10074; Pause Music';
+        playing = true;
+      }
+      function stop() {
+        frame.src = '';
+        btn.innerHTML = '&#9658; Play Music';
+        playing = false;
+      }
+
+      // Try autoplay immediately on load (browsers may block this silently).
+      start();
+
+      // Fallback: start on the visitor's very first interaction, in case
+      // the browser blocked the load-time autoplay attempt above.
+      var kickoffEvents = ['click', 'scroll', 'keydown', 'touchstart'];
+      function kickoff() {
+        start();
+        kickoffEvents.forEach(function (evt) {
+          document.removeEventListener(evt, kickoff);
+        });
+      }
+      kickoffEvents.forEach(function (evt) {
+        document.addEventListener(evt, kickoff, { passive: true });
+      });
+
       btn.addEventListener('click', function () {
-        if (!playing) {
-          frame.src = src;
-          btn.innerHTML = '&#10074;&#10074; Pause Music';
+        if (playing) {
+          stop();
         } else {
-          frame.src = '';
-          btn.innerHTML = '&#9658; Play Music';
+          start();
         }
-        playing = !playing;
       });
     })();
   </script>
