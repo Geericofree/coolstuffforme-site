@@ -278,6 +278,10 @@
       <div class="blob b8"><img src="photos/photo19.jpg" alt="Photo 19"></div>
       <div class="blob b9"><img src="photos/photo20.jpg" alt="Photo 20"></div>
       <div class="blob b10"><img src="photos/photo21.jpg" alt="Photo 21"></div>
+      <div class="blob b11"><img src="photos/photo22.jpg" alt="Photo 22"></div>
+      <div class="blob b1"><img src="photos/photo23.jpg" alt="Photo 23"></div>
+      <div class="blob b2"><img src="photos/photo24.jpg" alt="Photo 24"></div>
+      <div class="blob b3"><img src="photos/photo25.jpg" alt="Photo 25"></div>
     </div>
     <footer>&copy; 2026 Guido Rico</footer>
   </main>
@@ -351,13 +355,15 @@
         e.preventDefault();
         showHome();
       });
-      window.addEventListener('popstate', function () {
+      function syncToHash() {
         if (location.hash === '#photos') {
           showPhotos();
         } else {
           showHome();
         }
-      });
+      }
+      window.addEventListener('popstate', syncToHash);
+      window.addEventListener('hashchange', syncToHash);
       if (location.hash === '#photos') {
         showPhotos();
       }
