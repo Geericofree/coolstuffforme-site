@@ -386,11 +386,16 @@
       // Try autoplay immediately on load (browsers may block this silently).
       start();
 
-      // Fallback: start on the visitor's very first interaction, in case
-      // the browser blocked the load-time autoplay attempt above.
+      // Fallback: reload the player on the visitor's very first interaction.
+      // Mobile browsers require audio to start inside a real user-gesture
+      // handler, so this re-triggers the load even though `playing` is
+      // already true from the optimistic attempt above.
       var kickoffEvents = ['click', 'scroll', 'keydown', 'touchstart'];
-      function kickoff() {
-        start();
+      function kickoff(e) {
+        if (e.target === btn) return; // let the toggle button manage itself
+        if (playing) {
+          frame.src = src;
+        }
         kickoffEvents.forEach(function (evt) {
           document.removeEventListener(evt, kickoff);
         });
