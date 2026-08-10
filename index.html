@@ -231,6 +231,45 @@
     z-index: 5;
     box-shadow: 0 0 28px rgba(57, 255, 20, 0.55);
   }
+  .facts {
+    margin-top: 3rem;
+    text-align: left;
+  }
+  .facts h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 1.25rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .facts-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+  .facts-list li {
+    display: flex;
+    gap: 0.85rem;
+    align-items: baseline;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.55);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .facts-list .num {
+    flex: none;
+    color: var(--accent);
+    font-weight: 600;
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+  }
   #music-toggle {
     position: fixed;
     bottom: 1.25rem;
@@ -341,6 +380,23 @@
       <div class="blob b7"><img src="photos/photo40.jpg" alt="Youngsters&amp;Me"></div>
     </div>
     <p class="quote">&ldquo;Be extremely subtle, even to the point of formlessness. Be extremely mysterious, even to the point of soundlessness.&rdquo; &mdash; Sun Tzu</p>
+
+    <section class="facts">
+      <h2>10 Things About Me</h2>
+      <ol class="facts-list">
+        <li><span class="num">1.</span><span>I've been 7 times in Cuba.</span></li>
+        <li><span class="num">2.</span><span>My dog was homeless so I picked it from the streets &mdash; already 14 years with me.</span></li>
+        <li><span class="num">3.</span><span>If a horror Netflix series, watch "Todos estamos muertos." I do recommend.</span></li>
+        <li><span class="num">4.</span><span>If a song, "99 Problems" &mdash; Jay-Z.</span></li>
+        <li><span class="num">5.</span><span>I ever wondered since I was 7 how it's to be +40 years old. Now I'm here! Good!</span></li>
+        <li><span class="num">6.</span><span>"Education is not something you can finish." &mdash; Isaac Asimov.</span></li>
+        <li><span class="num">7.</span><span>"This rule is so underrated, keep your family and business completely separated." &mdash; The Notorious B.I.G.</span></li>
+        <li><span class="num">8.</span><span>Why don't broccoli and Brussels sprouts ever fight? Because they're vege-table friendly.</span></li>
+        <li><span class="num">9.</span><span>How often do you have lucid dreams or d&eacute;j&agrave; vus... I do, like every year actually.</span></li>
+        <li><span class="num">10.</span><span>If food&hellip; sushi! (and you might think whatever, I'm fine.)</span></li>
+      </ol>
+    </section>
+
     <footer>&copy; 2026 Guido Rico</footer>
   </main>
 
