@@ -7,11 +7,11 @@
 <title>Guido Rico</title>
 <style>
   :root {
-    --bg: #000000;
-    --text: #eafff0;
-    --muted: #7fbf8f;
-    --accent: #39ff14;
-    --border: #1f3d24;
+    --bg: #0e0e0f;
+    --text: #eaeaea;
+    --muted: #8f8f8f;
+    --accent: #d4d4d4;
+    --border: #262626;
   }
   * { box-sizing: border-box; }
   html, body {
@@ -23,226 +23,164 @@
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     min-height: 100vh;
-    padding: 4rem 2rem;
-  }
-  #matrix-rain {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    display: block;
-  }
-  .scanlines {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0) 0px,
-      rgba(0, 0, 0, 0) 1px,
-      rgba(0, 0, 0, 0.18) 2px,
-      rgba(0, 0, 0, 0.18) 3px
-    );
-    animation: crt-flicker 6s infinite;
-  }
-  .crt-vignette {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.55) 100%);
-  }
-  @keyframes crt-flicker {
-    0%, 100% { opacity: 0.9; }
-    92% { opacity: 0.9; }
-    93% { opacity: 0.5; }
-    94% { opacity: 0.9; }
-    97% { opacity: 0.65; }
-    98% { opacity: 0.9; }
+    padding: 5rem 1.5rem;
   }
   main {
-    max-width: 560px;
+    max-width: 480px;
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    position: relative;
-    z-index: 1;
   }
   .avatar {
-    width: 120px;
-    height: 120px;
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
     object-fit: cover;
-    margin: 0 0 1.25rem;
-    border: 1px solid var(--accent);
-    box-shadow: 0 0 16px rgba(57, 255, 20, 0.35);
+    margin: 0 0 1.5rem;
   }
   h1 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 600;
     margin: 0 0 0.5rem;
-    letter-spacing: -0.02em;
-    text-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+    letter-spacing: -0.01em;
   }
   p.bio {
     color: var(--muted);
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.6;
-    margin: 0 0 2rem;
+    margin: 0 0 2.5rem;
   }
   p.quote {
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-style: italic;
     line-height: 1.6;
     text-align: center;
-    margin: 2rem 0 0;
+    margin: 2.5rem 0 0;
   }
   .contact {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    align-items: center;
+    gap: 0.6rem;
+    align-items: stretch;
   }
   a.contact-link {
     color: var(--text);
     text-decoration: none;
-    font-size: 0.95rem;
-    padding: 0.6rem 1.4rem;
+    font-size: 0.92rem;
+    padding: 0.7rem 1rem;
     border: 1px solid var(--border);
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(2px);
-    transition: background 0.15s ease, border-color 0.15s ease;
+    border-radius: 8px;
+    background: transparent;
+    transition: border-color 0.15s ease, background 0.15s ease;
   }
   a.contact-link:hover {
-    background: rgba(57, 255, 20, 0.12);
-    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.04);
+    border-color: #3a3a3a;
   }
   .dog {
-    margin-top: 3rem;
+    margin-top: 3.5rem;
   }
   .dog h2 {
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 600;
     margin: 0 0 1rem;
     color: var(--muted);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
   }
   .dog img {
     width: 100%;
     max-width: 100%;
-    border-radius: 12px;
-    border: 1px solid var(--accent);
-    box-shadow: 0 0 16px rgba(57, 255, 20, 0.25);
+    border-radius: 10px;
   }
   .dog blockquote {
     margin: 1rem 0 0;
     font-style: italic;
     color: var(--muted);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.5;
   }
   .dog cite {
     display: block;
     margin-top: 0.4rem;
     font-style: normal;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     color: var(--accent);
   }
   .comments {
-    margin-top: 3rem;
+    margin-top: 3.5rem;
     text-align: left;
   }
   .comments h2 {
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 600;
     text-align: center;
     margin: 0 0 1rem;
     color: var(--muted);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
   }
   .visits {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     display: flex;
     justify-content: center;
+    opacity: 0.55;
+    filter: grayscale(1);
   }
   footer {
-    margin-top: 2rem;
-    font-size: 0.8rem;
-    color: #4a7a55;
+    margin-top: 2.5rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    opacity: 0.7;
   }
   a.back {
     display: inline-block;
     margin-bottom: 2rem;
-    color: var(--accent);
+    color: var(--muted);
     text-decoration: none;
-    font-size: 0.9rem;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 0.5rem 1.2rem;
+    font-size: 0.88rem;
   }
   a.back:hover {
-    background: rgba(57, 255, 20, 0.12);
-    border-color: var(--accent);
+    color: var(--text);
   }
   #view-photos {
-    max-width: 900px;
+    max-width: 760px;
   }
   .cluster {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.6rem;
   }
   .blob {
     position: relative;
-    width: 220px;
-    height: 220px;
-    margin: -18px;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
-    border: 2px solid var(--accent);
-    box-shadow: 0 0 18px rgba(57, 255, 20, 0.3);
-    background: #000;
+    border-radius: 8px;
+    background: #1a1a1a;
   }
   .blob img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: opacity 0.15s ease;
   }
-  .b1  { border-radius: 42% 58% 63% 37% / 47% 41% 59% 53%; transform: rotate(-4deg) translateY(6px); }
-  .b2  { border-radius: 63% 37% 54% 46% / 42% 60% 40% 58%; transform: rotate(6deg) translateY(-10px); width: 190px; height: 190px; }
-  .b3  { border-radius: 38% 62% 45% 55% / 60% 48% 52% 40%; transform: rotate(-8deg) translateY(14px); width: 240px; height: 240px; }
-  .b4  { border-radius: 55% 45% 38% 62% / 45% 55% 62% 38%; transform: rotate(5deg) translateY(-4px); width: 200px; height: 200px; }
-  .b5  { border-radius: 48% 52% 60% 40% / 38% 55% 45% 62%; transform: rotate(-6deg) translateY(10px); }
-  .b6  { border-radius: 60% 40% 48% 52% / 55% 45% 38% 62%; transform: rotate(9deg) translateY(-8px); width: 210px; height: 210px; }
-  .b7  { border-radius: 45% 55% 40% 60% / 62% 38% 55% 45%; transform: rotate(-3deg) translateY(8px); width: 230px; height: 230px; }
-  .b8  { border-radius: 52% 48% 58% 42% / 40% 62% 45% 55%; transform: rotate(7deg) translateY(-12px); width: 195px; height: 195px; }
-  .b9  { border-radius: 40% 60% 50% 50% / 55% 45% 60% 40%; transform: rotate(-9deg) translateY(4px); width: 215px; height: 215px; }
-  .b10 { border-radius: 58% 42% 45% 55% / 48% 58% 40% 62%; transform: rotate(4deg) translateY(-6px); width: 200px; height: 200px; }
-  .b11 { border-radius: 46% 54% 62% 38% / 50% 44% 56% 50%; transform: rotate(-5deg) translateY(10px); width: 225px; height: 225px; }
-  .blob:hover {
-    z-index: 5;
-    box-shadow: 0 0 28px rgba(57, 255, 20, 0.55);
+  .blob:hover img {
+    opacity: 0.85;
   }
   .facts {
-    margin-top: 3rem;
+    margin-top: 3.5rem;
     text-align: left;
   }
   .facts h2 {
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 600;
     text-align: center;
     margin: 0 0 1.25rem;
     color: var(--muted);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
   }
   .facts-list {
     list-style: none;
@@ -250,50 +188,46 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
   }
   .facts-list li {
     display: flex;
     gap: 0.85rem;
     align-items: baseline;
-    padding: 0.85rem 1rem;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.55);
-    font-size: 0.92rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
     line-height: 1.5;
     color: var(--text);
   }
+  .facts-list li:last-child {
+    border-bottom: none;
+  }
   .facts-list .num {
     flex: none;
-    color: var(--accent);
+    color: var(--muted);
     font-weight: 600;
-    text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
   }
   #music-toggle {
     position: fixed;
     bottom: 1.25rem;
     right: 1.25rem;
     z-index: 2;
-    background: rgba(0, 0, 0, 0.7);
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    padding: 0.6rem 1.1rem;
-    font-size: 0.85rem;
+    background: var(--bg);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.55rem 1rem;
+    font-size: 0.8rem;
     font-family: inherit;
     cursor: pointer;
-    box-shadow: 0 0 12px rgba(57, 255, 20, 0.3);
   }
   #music-toggle:hover {
-    background: rgba(57, 255, 20, 0.15);
+    color: var(--text);
+    border-color: #3a3a3a;
   }
 </style>
 </head>
 <body>
-  <canvas id="matrix-rain"></canvas>
-  <div class="scanlines"></div>
-  <div class="crt-vignette"></div>
   <main id="view-home">
     <img class="avatar" src="avatar.jpg" alt="Guido Rico">
     <h1>Guido Rico</h1>
@@ -320,7 +254,7 @@
         repo="Geericofree/coolstuffforme-site"
         issue-term="pathname"
         label="Comment"
-        theme="github-dark-orange"
+        theme="github-dark"
         crossorigin="anonymous"
         async>
       </script>
@@ -359,7 +293,7 @@
       <div class="blob b8"><img src="photos/photo19.jpg" alt="LikeDubai"></div>
       <div class="blob b9"><img src="photos/photo20.jpg" alt="Manzanillo"></div>
       <div class="blob b10"><img src="photos/photo21.jpg" alt="Mario&amp;I"></div>
-      <div class="blob b11"><img src="photos/photo22.jpg" alt="Me&amp;Pá"></div>
+      <div class="blob b11"><img src="photos/photo22.jpg" alt="Me&amp;Pá"></div>
       <div class="blob b1"><img src="photos/photo23.jpg" alt="Me2"></div>
       <div class="blob b2"><img src="photos/photo24.jpg" alt="MiddleofSomewhere"></div>
       <div class="blob b3"><img src="photos/photo25.jpg" alt="Mom&amp;I"></div>
@@ -402,341 +336,6 @@
 
   <button id="music-toggle" type="button">&#9658; Play Music</button>
   <iframe id="yt-audio" title="Background music" style="position:absolute;width:0;height:0;border:0;" allow="autoplay"></iframe>
-
-  <script>
-    (function () {
-      var canvas = document.getElementById('matrix-rain');
-      var ctx = canvas.getContext('2d');
-      var chars = '$01アイウエオカキクケコサシスセソタチツテト{}();=<>100#&%^SHA256'.split('');
-      var fontSize = 16;
-      var columns, drops;
-
-      var CANDLE_SPACING = 10;
-      var CANDLE_WIDTH = 6;
-      var bandDefs = [
-        { yFrac: 0.14, label: 'NASDAQ', speed: 0.35 },
-        { yFrac: 0.40, label: 'DOW JONES', speed: 0.4 },
-        { yFrac: 0.62, label: 'BTC/USD', speed: 0.5 },
-        { yFrac: 0.88, label: 'S&P 500', speed: 0.28 }
-      ];
-      var bands = [];
-
-      var LOG_LINE_HEIGHT = 14;
-      var bootMessages = [
-        'BOOT: KERNEL LOADED', 'MEM CHECK... 640K OK', 'MOUNT /dev/sda1',
-        'PROC 0x4F2A SPAWNED', 'AUTH TOKEN VALIDATED', 'NET: LINK UP eth0',
-        'CACHE FLUSH COMPLETE', 'INDEX REBUILD... OK', 'GC CYCLE 00A3',
-        'HEAP COMPACTED', 'SYSCALL read() -> 0x00', 'THREAD POOL SCALED x4',
-        'CRON JOB #118 EXEC', 'TLS HANDSHAKE OK', 'QUEUE DEPTH: 000',
-        'WATCHDOG PING', 'DB TXN COMMIT', 'SNAPSHOT SAVED',
-        'LOAD AVG 0.42 0.38 0.31', 'DISK I/O NOMINAL', 'ROUTE TABLE SYNCED',
-        'BUFFER REALLOC 0x1A9C', 'SESSION KEEPALIVE',
-        'FIREWALL: RULESET LOADED', 'IDS: SIGNATURE DB UPDATED',
-        'PORT SCAN DETECTED 10.0.4.2', 'MALWARE SCAN: CLEAN',
-        'AES-256-GCM SESSION KEY', 'SSH FINGERPRINT VERIFIED',
-        'PACKET DROPPED 198.51.100.7', 'ROOTKIT CHECK PASSED',
-        'CERT CHAIN VALID', 'VULN SCAN: 0 CRITICAL',
-        'BRUTE FORCE BLOCKED x3', 'HONEYPOT TRIGGERED',
-        'IP 203.0.113.44 BLACKLISTED', '2FA CHALLENGE PASSED',
-        'INTRUSION SIGNATURE MATCH', 'VPN TUNNEL ESTABLISHED',
-        'SANDBOX DETONATION: SAFE', 'HASH SHA256 VERIFIED',
-        'ACCESS TOKEN REVOKED', 'ANOMALY SCORE 0.02'
-      ];
-      var leftLog = { lines: [], offset: 0, speed: 0.25 };
-      var rightHex = { lines: [], offset: 0, speed: 0.2 };
-      var startTime = Date.now();
-      var threatsBlocked = 0;
-      var nextThreatTick = 4000 + Math.random() * 5000;
-
-      function randomLogLine() {
-        return bootMessages[Math.floor(Math.random() * bootMessages.length)];
-      }
-      function hex(n, width) {
-        var s = n.toString(16).toUpperCase();
-        while (s.length < width) s = '0' + s;
-        return s;
-      }
-      function randomHexLine() {
-        var bytes = [];
-        for (var i = 0; i < 6; i++) bytes.push(hex(Math.floor(Math.random() * 256), 2));
-        return '0x' + hex(Math.floor(Math.random() * 0xFFFF), 4) + '  ' + bytes.join(' ');
-      }
-      function randomIp() {
-        return [Math.floor(Math.random() * 223) + 1, Math.floor(Math.random() * 256),
-          Math.floor(Math.random() * 256), Math.floor(Math.random() * 256)].join('.');
-      }
-      function randomPacketLine() {
-        var verdict = Math.random() > 0.78 ? 'DENY' : 'ALLOW';
-        var port = [22, 80, 443, 3389, 8080, 31337][Math.floor(Math.random() * 6)];
-        return randomIp() + ':' + port + ' -> ' + randomIp() + ' [' + verdict + ']';
-      }
-      function randomStreamLine() {
-        return Math.random() > 0.45 ? randomHexLine() : randomPacketLine();
-      }
-      function initStreams() {
-        var count = Math.ceil(canvas.height / LOG_LINE_HEIGHT) + 2;
-        leftLog.lines = [];
-        rightHex.lines = [];
-        for (var i = 0; i < count; i++) {
-          leftLog.lines.push(randomLogLine());
-          rightHex.lines.push(randomStreamLine());
-        }
-      }
-      function stepStream(stream, generator) {
-        stream.offset += stream.speed;
-        if (stream.offset >= LOG_LINE_HEIGHT) {
-          stream.offset -= LOG_LINE_HEIGHT;
-          stream.lines.shift();
-          stream.lines.push(generator());
-        }
-      }
-      function drawStream(stream, align) {
-        ctx.save();
-        ctx.globalAlpha = 0.16;
-        ctx.font = '10px monospace';
-        ctx.textAlign = align;
-        var x = align === 'left' ? 10 : canvas.width - 10;
-        for (var i = 0; i < stream.lines.length; i++) {
-          var y = i * LOG_LINE_HEIGHT - stream.offset;
-          if (y < -LOG_LINE_HEIGHT || y > canvas.height + LOG_LINE_HEIGHT) continue;
-          ctx.fillStyle = '#39ff14';
-          ctx.fillText(stream.lines[i], x, y);
-        }
-        ctx.restore();
-      }
-      function drawHud() {
-        var elapsed = Math.floor((Date.now() - startTime) / 1000);
-        var hh = Math.floor(elapsed / 3600);
-        var mm = Math.floor((elapsed % 3600) / 60);
-        var ss = elapsed % 60;
-        var uptime = [hh, mm, ss].map(function (n) { return n < 10 ? '0' + n : '' + n; }).join(':');
-        var cursor = Math.floor(Date.now() / 500) % 2 === 0 ? '█' : ' ';
-        ctx.save();
-        ctx.globalAlpha = 0.28;
-        ctx.font = '11px monospace';
-        ctx.textAlign = 'left';
-        ctx.fillStyle = '#39ff14';
-        ctx.fillText('MAINFRAME://COOLSTUFFFORME.NET  UPTIME ' + uptime + '  STATUS: ONLINE' + cursor, 10, 16);
-        ctx.globalAlpha = 0.22;
-        ctx.fillText('FIREWALL: ACTIVE  IDS: ARMED  THREATS BLOCKED: ' + threatsBlocked, 10, 30);
-        ctx.restore();
-      }
-
-      function stepThreatCounter(dt) {
-        nextThreatTick -= dt;
-        if (nextThreatTick <= 0) {
-          threatsBlocked++;
-          nextThreatTick = 4000 + Math.random() * 6000;
-          triggerAlert();
-        }
-      }
-
-      var alertMessages = [
-        'INTRUSION ATTEMPT BLOCKED', 'PORT SCAN DETECTED', 'BRUTE FORCE ATTEMPT DENIED',
-        'MALWARE SIGNATURE QUARANTINED', 'UNAUTHORIZED ACCESS BLOCKED', 'DDoS PACKET FILTERED'
-      ];
-      var activeAlert = null;
-      var alertUntil = 0;
-      function triggerAlert() {
-        activeAlert = alertMessages[Math.floor(Math.random() * alertMessages.length)] + ' :: ' + randomIp();
-        alertUntil = Date.now() + 2600;
-      }
-      function drawAlert() {
-        if (!activeAlert) return;
-        var remaining = alertUntil - Date.now();
-        if (remaining <= 0) { activeAlert = null; return; }
-        var pulse = 0.35 + 0.25 * Math.abs(Math.sin(Date.now() / 140));
-        ctx.save();
-        ctx.globalAlpha = Math.min(1, remaining / 400) * pulse + 0.15;
-        ctx.font = 'bold 12px monospace';
-        ctx.textAlign = 'center';
-        ctx.fillStyle = '#ff3b3b';
-        ctx.fillText('⚠ ' + activeAlert, canvas.width / 2, 24);
-        ctx.restore();
-      }
-
-      var radarBlips = [];
-      function initRadar() {
-        radarBlips = [];
-        for (var i = 0; i < 5; i++) {
-          radarBlips.push({ angle: Math.random() * Math.PI * 2, r: 0.25 + Math.random() * 0.7 });
-        }
-      }
-      function drawRadar() {
-        var radius = 62;
-        var cx = canvas.width - radius - 18;
-        var cy = canvas.height - radius - 18;
-        var sweepAngle = (Date.now() / 900) % (Math.PI * 2);
-
-        ctx.save();
-        ctx.globalAlpha = 0.3;
-        ctx.strokeStyle = '#39ff14';
-        ctx.lineWidth = 1;
-        [0.34, 0.67, 1].forEach(function (f) {
-          ctx.beginPath();
-          ctx.arc(cx, cy, radius * f, 0, Math.PI * 2);
-          ctx.stroke();
-        });
-        ctx.beginPath();
-        ctx.moveTo(cx - radius, cy);
-        ctx.lineTo(cx + radius, cy);
-        ctx.moveTo(cx, cy - radius);
-        ctx.lineTo(cx, cy + radius);
-        ctx.stroke();
-
-        var grad = ctx.createLinearGradient(cx, cy, cx + Math.cos(sweepAngle) * radius, cy + Math.sin(sweepAngle) * radius);
-        grad.addColorStop(0, 'rgba(57,255,20,0.5)');
-        grad.addColorStop(1, 'rgba(57,255,20,0)');
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(cx, cy);
-        ctx.lineTo(cx + Math.cos(sweepAngle) * radius, cy + Math.sin(sweepAngle) * radius);
-        ctx.stroke();
-
-        radarBlips.forEach(function (b) {
-          var bx = cx + Math.cos(b.angle) * radius * b.r;
-          var by = cy + Math.sin(b.angle) * radius * b.r;
-          var diff = Math.abs(((sweepAngle - b.angle + Math.PI) % (Math.PI * 2)) - Math.PI);
-          var lit = diff < 0.5;
-          ctx.globalAlpha = lit ? 0.9 : 0.25;
-          ctx.fillStyle = lit ? '#ff3b3b' : '#39ff14';
-          ctx.beginPath();
-          ctx.arc(bx, by, lit ? 2.5 : 1.5, 0, Math.PI * 2);
-          ctx.fill();
-        });
-
-        ctx.globalAlpha = 0.28;
-        ctx.font = '9px monospace';
-        ctx.textAlign = 'center';
-        ctx.fillStyle = '#39ff14';
-        ctx.fillText('THREAT SCAN', cx, cy - radius - 8);
-        ctx.restore();
-      }
-
-      function makeCandle(open) {
-        var close = open + (Math.random() - 0.5) * 6;
-        return {
-          open: open,
-          close: close,
-          high: Math.max(open, close) + Math.random() * 3,
-          low: Math.min(open, close) - Math.random() * 3
-        };
-      }
-
-      function initCharts() {
-        bands = bandDefs.map(function (def) {
-          var count = Math.ceil(canvas.width / CANDLE_SPACING) + 4;
-          var candles = [];
-          var price = 40 + Math.random() * 20;
-          for (var i = 0; i < count; i++) {
-            var c = makeCandle(price);
-            candles.push(c);
-            price = c.close;
-          }
-          return {
-            yFrac: def.yFrac,
-            label: def.label,
-            speed: def.speed,
-            candles: candles,
-            offset: 0
-          };
-        });
-      }
-
-      function size() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        columns = Math.floor(canvas.width / fontSize);
-        drops = new Array(columns).fill(1);
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        initCharts();
-        initStreams();
-        initRadar();
-      }
-      size();
-      window.addEventListener('resize', size);
-
-      function stepChart(band) {
-        band.offset += band.speed;
-        if (band.offset >= CANDLE_SPACING) {
-          band.offset -= CANDLE_SPACING;
-          band.candles.shift();
-          band.candles.push(makeCandle(band.candles[band.candles.length - 1].close));
-        }
-      }
-
-      function drawChart(band) {
-        var vals = [];
-        band.candles.forEach(function (c) { vals.push(c.high, c.low); });
-        var max = Math.max.apply(null, vals);
-        var min = Math.min.apply(null, vals);
-        var range = Math.max(max - min, 1);
-        var bandHeight = canvas.height * 0.11;
-        var centerY = band.yFrac * canvas.height;
-        var scale = bandHeight / range;
-
-        function priceToY(price) {
-          return centerY + bandHeight / 2 - (price - min) * scale;
-        }
-
-        ctx.save();
-        ctx.globalAlpha = 0.3;
-        band.candles.forEach(function (c, i) {
-          var x = i * CANDLE_SPACING - band.offset;
-          if (x < -CANDLE_SPACING || x > canvas.width + CANDLE_SPACING) return;
-          var up = c.close >= c.open;
-          ctx.strokeStyle = up ? '#39ff14' : '#ff5555';
-          ctx.fillStyle = up ? '#39ff14' : '#ff5555';
-          ctx.beginPath();
-          ctx.moveTo(x, priceToY(c.high));
-          ctx.lineTo(x, priceToY(c.low));
-          ctx.stroke();
-          var oY = priceToY(c.open);
-          var cY = priceToY(c.close);
-          var top = Math.min(oY, cY);
-          var h = Math.max(Math.abs(cY - oY), 1);
-          ctx.fillRect(x - CANDLE_WIDTH / 2, top, CANDLE_WIDTH, h);
-        });
-        ctx.globalAlpha = 0.22;
-        ctx.font = '11px monospace';
-        ctx.fillStyle = '#39ff14';
-        ctx.fillText(band.label, 10, centerY - bandHeight / 2 - 6);
-        ctx.restore();
-      }
-
-      function draw() {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.font = fontSize + 'px monospace';
-        for (var i = 0; i < columns; i++) {
-          var text = chars[Math.floor(Math.random() * chars.length)];
-          var x = i * fontSize;
-          var y = drops[i] * fontSize;
-          ctx.fillStyle = Math.random() > 0.93 ? '#c6ffcf' : '#39ff14';
-          ctx.fillText(text, x, y);
-          if (y > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-          }
-          drops[i]++;
-        }
-        bands.forEach(function (band) {
-          stepChart(band);
-          drawChart(band);
-        });
-        stepStream(leftLog, randomLogLine);
-        stepStream(rightHex, randomStreamLine);
-        drawStream(leftLog, 'left');
-        drawStream(rightHex, 'right');
-        stepThreatCounter(45);
-        drawRadar();
-        drawHud();
-        drawAlert();
-      }
-      setInterval(draw, 45);
-    })();
-  </script>
 
   <script>
     (function () {
