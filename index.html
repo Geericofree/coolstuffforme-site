@@ -34,6 +34,35 @@
     z-index: -1;
     display: block;
   }
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 1px,
+      rgba(0, 0, 0, 0.18) 2px,
+      rgba(0, 0, 0, 0.18) 3px
+    );
+    animation: crt-flicker 6s infinite;
+  }
+  .crt-vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.55) 100%);
+  }
+  @keyframes crt-flicker {
+    0%, 100% { opacity: 0.9; }
+    92% { opacity: 0.9; }
+    93% { opacity: 0.5; }
+    94% { opacity: 0.9; }
+    97% { opacity: 0.65; }
+    98% { opacity: 0.9; }
+  }
   main {
     max-width: 560px;
     width: 100%;
@@ -224,6 +253,8 @@
 </head>
 <body>
   <canvas id="matrix-rain"></canvas>
+  <div class="scanlines"></div>
+  <div class="crt-vignette"></div>
   <main id="view-home">
     <img class="avatar" src="avatar.jpg" alt="Guido Rico">
     <h1>Guido Rico</h1>
@@ -323,6 +354,120 @@
       var fontSize = 16;
       var columns, drops;
 
+      var CANDLE_SPACING = 10;
+      var CANDLE_WIDTH = 6;
+      var bandDefs = [
+        { yFrac: 0.16, label: 'NASDAQ', speed: 0.35 },
+        { yFrac: 0.50, label: 'BTC/USD', speed: 0.5 },
+        { yFrac: 0.84, label: 'S&P 500', speed: 0.28 }
+      ];
+      var bands = [];
+
+      var LOG_LINE_HEIGHT = 14;
+      var bootMessages = [
+        'BOOT: KERNEL LOADED', 'MEM CHECK... 640K OK', 'MOUNT /dev/sda1',
+        'PROC 0x4F2A SPAWNED', 'AUTH TOKEN VALIDATED', 'NET: LINK UP eth0',
+        'CACHE FLUSH COMPLETE', 'INDEX REBUILD... OK', 'GC CYCLE 00A3',
+        'HEAP COMPACTED', 'SYSCALL read() -> 0x00', 'THREAD POOL SCALED x4',
+        'CRON JOB #118 EXEC', 'TLS HANDSHAKE OK', 'QUEUE DEPTH: 000',
+        'WATCHDOG PING', 'DB TXN COMMIT', 'SNAPSHOT SAVED',
+        'LOAD AVG 0.42 0.38 0.31', 'DISK I/O NOMINAL', 'ROUTE TABLE SYNCED',
+        'BUFFER REALLOC 0x1A9C', 'SESSION KEEPALIVE'
+      ];
+      var leftLog = { lines: [], offset: 0, speed: 0.25 };
+      var rightHex = { lines: [], offset: 0, speed: 0.2 };
+      var startTime = Date.now();
+
+      function randomLogLine() {
+        return bootMessages[Math.floor(Math.random() * bootMessages.length)];
+      }
+      function hex(n, width) {
+        var s = n.toString(16).toUpperCase();
+        while (s.length < width) s = '0' + s;
+        return s;
+      }
+      function randomHexLine() {
+        var bytes = [];
+        for (var i = 0; i < 6; i++) bytes.push(hex(Math.floor(Math.random() * 256), 2));
+        return '0x' + hex(Math.floor(Math.random() * 0xFFFF), 4) + '  ' + bytes.join(' ');
+      }
+      function initStreams() {
+        var count = Math.ceil(canvas.height / LOG_LINE_HEIGHT) + 2;
+        leftLog.lines = [];
+        rightHex.lines = [];
+        for (var i = 0; i < count; i++) {
+          leftLog.lines.push(randomLogLine());
+          rightHex.lines.push(randomHexLine());
+        }
+      }
+      function stepStream(stream, generator) {
+        stream.offset += stream.speed;
+        if (stream.offset >= LOG_LINE_HEIGHT) {
+          stream.offset -= LOG_LINE_HEIGHT;
+          stream.lines.shift();
+          stream.lines.push(generator());
+        }
+      }
+      function drawStream(stream, align) {
+        ctx.save();
+        ctx.globalAlpha = 0.16;
+        ctx.font = '10px monospace';
+        ctx.textAlign = align;
+        var x = align === 'left' ? 10 : canvas.width - 10;
+        for (var i = 0; i < stream.lines.length; i++) {
+          var y = i * LOG_LINE_HEIGHT - stream.offset;
+          if (y < -LOG_LINE_HEIGHT || y > canvas.height + LOG_LINE_HEIGHT) continue;
+          ctx.fillStyle = '#39ff14';
+          ctx.fillText(stream.lines[i], x, y);
+        }
+        ctx.restore();
+      }
+      function drawHud() {
+        var elapsed = Math.floor((Date.now() - startTime) / 1000);
+        var hh = Math.floor(elapsed / 3600);
+        var mm = Math.floor((elapsed % 3600) / 60);
+        var ss = elapsed % 60;
+        var uptime = [hh, mm, ss].map(function (n) { return n < 10 ? '0' + n : '' + n; }).join(':');
+        var cursor = Math.floor(Date.now() / 500) % 2 === 0 ? '█' : ' ';
+        ctx.save();
+        ctx.globalAlpha = 0.28;
+        ctx.font = '11px monospace';
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#39ff14';
+        ctx.fillText('MAINFRAME://COOLSTUFFFORME.NET  UPTIME ' + uptime + '  STATUS: ONLINE' + cursor, 10, 16);
+        ctx.restore();
+      }
+
+      function makeCandle(open) {
+        var close = open + (Math.random() - 0.5) * 6;
+        return {
+          open: open,
+          close: close,
+          high: Math.max(open, close) + Math.random() * 3,
+          low: Math.min(open, close) - Math.random() * 3
+        };
+      }
+
+      function initCharts() {
+        bands = bandDefs.map(function (def) {
+          var count = Math.ceil(canvas.width / CANDLE_SPACING) + 4;
+          var candles = [];
+          var price = 40 + Math.random() * 20;
+          for (var i = 0; i < count; i++) {
+            var c = makeCandle(price);
+            candles.push(c);
+            price = c.close;
+          }
+          return {
+            yFrac: def.yFrac,
+            label: def.label,
+            speed: def.speed,
+            candles: candles,
+            offset: 0
+          };
+        });
+      }
+
       function size() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -330,9 +475,59 @@
         drops = new Array(columns).fill(1);
         ctx.fillStyle = '#000';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+        initCharts();
+        initStreams();
       }
       size();
       window.addEventListener('resize', size);
+
+      function stepChart(band) {
+        band.offset += band.speed;
+        if (band.offset >= CANDLE_SPACING) {
+          band.offset -= CANDLE_SPACING;
+          band.candles.shift();
+          band.candles.push(makeCandle(band.candles[band.candles.length - 1].close));
+        }
+      }
+
+      function drawChart(band) {
+        var vals = [];
+        band.candles.forEach(function (c) { vals.push(c.high, c.low); });
+        var max = Math.max.apply(null, vals);
+        var min = Math.min.apply(null, vals);
+        var range = Math.max(max - min, 1);
+        var bandHeight = canvas.height * 0.11;
+        var centerY = band.yFrac * canvas.height;
+        var scale = bandHeight / range;
+
+        function priceToY(price) {
+          return centerY + bandHeight / 2 - (price - min) * scale;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = 0.3;
+        band.candles.forEach(function (c, i) {
+          var x = i * CANDLE_SPACING - band.offset;
+          if (x < -CANDLE_SPACING || x > canvas.width + CANDLE_SPACING) return;
+          var up = c.close >= c.open;
+          ctx.strokeStyle = up ? '#39ff14' : '#ff5555';
+          ctx.fillStyle = up ? '#39ff14' : '#ff5555';
+          ctx.beginPath();
+          ctx.moveTo(x, priceToY(c.high));
+          ctx.lineTo(x, priceToY(c.low));
+          ctx.stroke();
+          var oY = priceToY(c.open);
+          var cY = priceToY(c.close);
+          var top = Math.min(oY, cY);
+          var h = Math.max(Math.abs(cY - oY), 1);
+          ctx.fillRect(x - CANDLE_WIDTH / 2, top, CANDLE_WIDTH, h);
+        });
+        ctx.globalAlpha = 0.22;
+        ctx.font = '11px monospace';
+        ctx.fillStyle = '#39ff14';
+        ctx.fillText(band.label, 10, centerY - bandHeight / 2 - 6);
+        ctx.restore();
+      }
 
       function draw() {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
@@ -349,6 +544,15 @@
           }
           drops[i]++;
         }
+        bands.forEach(function (band) {
+          stepChart(band);
+          drawChart(band);
+        });
+        stepStream(leftLog, randomLogLine);
+        stepStream(rightHex, randomHexLine);
+        drawStream(leftLog, 'left');
+        drawStream(rightHex, 'right');
+        drawHud();
       }
       setInterval(draw, 45);
     })();
