@@ -407,7 +407,7 @@
     (function () {
       var canvas = document.getElementById('matrix-rain');
       var ctx = canvas.getContext('2d');
-      var chars = '$01アイウエオカキクケコサシスセソタチツテト{}();=<>100'.split('');
+      var chars = '$01アイウエオカキクケコサシスセソタチツテト{}();=<>100#&%^SHA256'.split('');
       var fontSize = 16;
       var columns, drops;
 
@@ -430,11 +430,23 @@
         'CRON JOB #118 EXEC', 'TLS HANDSHAKE OK', 'QUEUE DEPTH: 000',
         'WATCHDOG PING', 'DB TXN COMMIT', 'SNAPSHOT SAVED',
         'LOAD AVG 0.42 0.38 0.31', 'DISK I/O NOMINAL', 'ROUTE TABLE SYNCED',
-        'BUFFER REALLOC 0x1A9C', 'SESSION KEEPALIVE'
+        'BUFFER REALLOC 0x1A9C', 'SESSION KEEPALIVE',
+        'FIREWALL: RULESET LOADED', 'IDS: SIGNATURE DB UPDATED',
+        'PORT SCAN DETECTED 10.0.4.2', 'MALWARE SCAN: CLEAN',
+        'AES-256-GCM SESSION KEY', 'SSH FINGERPRINT VERIFIED',
+        'PACKET DROPPED 198.51.100.7', 'ROOTKIT CHECK PASSED',
+        'CERT CHAIN VALID', 'VULN SCAN: 0 CRITICAL',
+        'BRUTE FORCE BLOCKED x3', 'HONEYPOT TRIGGERED',
+        'IP 203.0.113.44 BLACKLISTED', '2FA CHALLENGE PASSED',
+        'INTRUSION SIGNATURE MATCH', 'VPN TUNNEL ESTABLISHED',
+        'SANDBOX DETONATION: SAFE', 'HASH SHA256 VERIFIED',
+        'ACCESS TOKEN REVOKED', 'ANOMALY SCORE 0.02'
       ];
       var leftLog = { lines: [], offset: 0, speed: 0.25 };
       var rightHex = { lines: [], offset: 0, speed: 0.2 };
       var startTime = Date.now();
+      var threatsBlocked = 0;
+      var nextThreatTick = 4000 + Math.random() * 5000;
 
       function randomLogLine() {
         return bootMessages[Math.floor(Math.random() * bootMessages.length)];
@@ -449,13 +461,25 @@
         for (var i = 0; i < 6; i++) bytes.push(hex(Math.floor(Math.random() * 256), 2));
         return '0x' + hex(Math.floor(Math.random() * 0xFFFF), 4) + '  ' + bytes.join(' ');
       }
+      function randomIp() {
+        return [Math.floor(Math.random() * 223) + 1, Math.floor(Math.random() * 256),
+          Math.floor(Math.random() * 256), Math.floor(Math.random() * 256)].join('.');
+      }
+      function randomPacketLine() {
+        var verdict = Math.random() > 0.78 ? 'DENY' : 'ALLOW';
+        var port = [22, 80, 443, 3389, 8080, 31337][Math.floor(Math.random() * 6)];
+        return randomIp() + ':' + port + ' -> ' + randomIp() + ' [' + verdict + ']';
+      }
+      function randomStreamLine() {
+        return Math.random() > 0.45 ? randomHexLine() : randomPacketLine();
+      }
       function initStreams() {
         var count = Math.ceil(canvas.height / LOG_LINE_HEIGHT) + 2;
         leftLog.lines = [];
         rightHex.lines = [];
         for (var i = 0; i < count; i++) {
           leftLog.lines.push(randomLogLine());
-          rightHex.lines.push(randomHexLine());
+          rightHex.lines.push(randomStreamLine());
         }
       }
       function stepStream(stream, generator) {
@@ -493,6 +517,100 @@
         ctx.textAlign = 'left';
         ctx.fillStyle = '#39ff14';
         ctx.fillText('MAINFRAME://COOLSTUFFFORME.NET  UPTIME ' + uptime + '  STATUS: ONLINE' + cursor, 10, 16);
+        ctx.globalAlpha = 0.22;
+        ctx.fillText('FIREWALL: ACTIVE  IDS: ARMED  THREATS BLOCKED: ' + threatsBlocked, 10, 30);
+        ctx.restore();
+      }
+
+      function stepThreatCounter(dt) {
+        nextThreatTick -= dt;
+        if (nextThreatTick <= 0) {
+          threatsBlocked++;
+          nextThreatTick = 4000 + Math.random() * 6000;
+          triggerAlert();
+        }
+      }
+
+      var alertMessages = [
+        'INTRUSION ATTEMPT BLOCKED', 'PORT SCAN DETECTED', 'BRUTE FORCE ATTEMPT DENIED',
+        'MALWARE SIGNATURE QUARANTINED', 'UNAUTHORIZED ACCESS BLOCKED', 'DDoS PACKET FILTERED'
+      ];
+      var activeAlert = null;
+      var alertUntil = 0;
+      function triggerAlert() {
+        activeAlert = alertMessages[Math.floor(Math.random() * alertMessages.length)] + ' :: ' + randomIp();
+        alertUntil = Date.now() + 2600;
+      }
+      function drawAlert() {
+        if (!activeAlert) return;
+        var remaining = alertUntil - Date.now();
+        if (remaining <= 0) { activeAlert = null; return; }
+        var pulse = 0.35 + 0.25 * Math.abs(Math.sin(Date.now() / 140));
+        ctx.save();
+        ctx.globalAlpha = Math.min(1, remaining / 400) * pulse + 0.15;
+        ctx.font = 'bold 12px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#ff3b3b';
+        ctx.fillText('⚠ ' + activeAlert, canvas.width / 2, 24);
+        ctx.restore();
+      }
+
+      var radarBlips = [];
+      function initRadar() {
+        radarBlips = [];
+        for (var i = 0; i < 5; i++) {
+          radarBlips.push({ angle: Math.random() * Math.PI * 2, r: 0.25 + Math.random() * 0.7 });
+        }
+      }
+      function drawRadar() {
+        var radius = 62;
+        var cx = canvas.width - radius - 18;
+        var cy = canvas.height - radius - 18;
+        var sweepAngle = (Date.now() / 900) % (Math.PI * 2);
+
+        ctx.save();
+        ctx.globalAlpha = 0.3;
+        ctx.strokeStyle = '#39ff14';
+        ctx.lineWidth = 1;
+        [0.34, 0.67, 1].forEach(function (f) {
+          ctx.beginPath();
+          ctx.arc(cx, cy, radius * f, 0, Math.PI * 2);
+          ctx.stroke();
+        });
+        ctx.beginPath();
+        ctx.moveTo(cx - radius, cy);
+        ctx.lineTo(cx + radius, cy);
+        ctx.moveTo(cx, cy - radius);
+        ctx.lineTo(cx, cy + radius);
+        ctx.stroke();
+
+        var grad = ctx.createLinearGradient(cx, cy, cx + Math.cos(sweepAngle) * radius, cy + Math.sin(sweepAngle) * radius);
+        grad.addColorStop(0, 'rgba(57,255,20,0.5)');
+        grad.addColorStop(1, 'rgba(57,255,20,0)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(sweepAngle) * radius, cy + Math.sin(sweepAngle) * radius);
+        ctx.stroke();
+
+        radarBlips.forEach(function (b) {
+          var bx = cx + Math.cos(b.angle) * radius * b.r;
+          var by = cy + Math.sin(b.angle) * radius * b.r;
+          var diff = Math.abs(((sweepAngle - b.angle + Math.PI) % (Math.PI * 2)) - Math.PI);
+          var lit = diff < 0.5;
+          ctx.globalAlpha = lit ? 0.9 : 0.25;
+          ctx.fillStyle = lit ? '#ff3b3b' : '#39ff14';
+          ctx.beginPath();
+          ctx.arc(bx, by, lit ? 2.5 : 1.5, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        ctx.globalAlpha = 0.28;
+        ctx.font = '9px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#39ff14';
+        ctx.fillText('THREAT SCAN', cx, cy - radius - 8);
         ctx.restore();
       }
 
@@ -535,6 +653,7 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         initCharts();
         initStreams();
+        initRadar();
       }
       size();
       window.addEventListener('resize', size);
@@ -607,10 +726,13 @@
           drawChart(band);
         });
         stepStream(leftLog, randomLogLine);
-        stepStream(rightHex, randomHexLine);
+        stepStream(rightHex, randomStreamLine);
         drawStream(leftLog, 'left');
         drawStream(rightHex, 'right');
+        stepThreatCounter(45);
+        drawRadar();
         drawHud();
+        drawAlert();
       }
       setInterval(draw, 45);
     })();
