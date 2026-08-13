@@ -7,7 +7,7 @@
 
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://utteranc.es https://static.cloudflareinsights.com",
+  "script-src 'self' https://utteranc.es https://static.cloudflareinsights.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://visitor-badge.laobi.icu",
   "frame-src https://utteranc.es https://www.youtube.com",
