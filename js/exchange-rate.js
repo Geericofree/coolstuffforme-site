@@ -2,7 +2,7 @@
   var el = document.getElementById('usd-mxn-rate');
   if (!el) return;
 
-  fetch('https://api.frankfurter.app/latest?from=USD&to=MXN')
+  fetch('https://api.frankfurter.dev/v1/latest?from=USD&to=MXN')
     .then(function (res) {
       if (!res.ok) throw new Error('bad response');
       return res.json();

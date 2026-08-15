@@ -12,7 +12,7 @@ const CSP = [
   "img-src 'self' data: https://visitor-badge.laobi.icu",
   "frame-src https://utteranc.es https://www.youtube.com",
   "font-src 'self'",
-  "connect-src 'self' https://api.frankfurter.app",
+  "connect-src 'self' https://api.frankfurter.dev",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
