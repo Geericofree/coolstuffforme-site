@@ -89,6 +89,12 @@
     background: rgba(255, 255, 255, 0.04);
     border-color: #3a3a3a;
   }
+  .rate {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
   .dog {
     margin-top: 3.5rem;
   }
@@ -251,7 +257,7 @@
       <a class="contact-link" href="sms:+525543401033">SMS: +52 55 4340 1033</a>
       <a class="contact-link" href="https://pin.it/1Jx5ilnXi" target="_blank" rel="noopener">Pinterest</a>
       <a class="contact-link" href="https://wa.me/525543401033" target="_blank" rel="noopener">WhatsApp: +52 55 4340 1033</a>
-      <a class="contact-link" href="https://etoro.tw/3RIu6vW" target="_blank" rel="noopener sponsored">Happy investing!</a>
+      <a class="contact-link" href="https://etoro.tw/3RIu6vW" target="_blank" rel="noopener sponsored">Happy investing!<span id="usd-mxn-rate" class="rate"></span></a>
       <a class="contact-link" href="#photos" id="nav-photos">Photos</a>
     </div>
     <section class="dog">
@@ -353,5 +359,6 @@
   <script src="js/background.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/music.js"></script>
+  <script src="js/exchange-rate.js"></script>
 </body>
 </html>
