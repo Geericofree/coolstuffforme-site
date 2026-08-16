@@ -322,6 +322,39 @@
     z-index: 0;
     pointer-events: none;
   }
+  .hw-icon {
+    font-size: 2.4rem;
+    margin: 0 auto 1rem;
+    line-height: 1;
+  }
+  .halloween-banner {
+    margin: 0 0 1.5rem;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: linear-gradient(90deg, rgba(120, 0, 180, 0.2), rgba(0, 255, 140, 0.08), rgba(255, 120, 0, 0.16));
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .halloween-fog {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 50% 100%, rgba(80, 0, 120, 0.2), transparent 60%),
+      radial-gradient(ellipse at 20% 0%, rgba(0, 255, 140, 0.09), transparent 55%);
+    mix-blend-mode: screen;
+  }
+  #halloween-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
 </style>
 </head>
 <body>
@@ -347,6 +380,13 @@
       </div>
       <p class="countdown-text" id="countdown-text">Loading&hellip;</p>
       <p class="countdown-label">until Mexico's Independence Day</p>
+    </section>
+
+    <section class="countdown">
+      <h2>Countdown to Halloween</h2>
+      <div class="hw-icon" role="img" aria-label="Halloween">&#127875;</div>
+      <p class="countdown-text" id="countdown-halloween-text">Loading&hellip;</p>
+      <p class="countdown-label">until Halloween</p>
     </section>
 
     <section class="dog">
@@ -451,5 +491,6 @@
   <script src="js/exchange-rate.js"></script>
   <script src="js/countdown.js"></script>
   <script src="js/fiesta.js"></script>
+  <script src="js/halloween.js"></script>
 </body>
 </html>
