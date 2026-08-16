@@ -282,6 +282,46 @@
     color: var(--text);
     border-color: #3a3a3a;
   }
+  .papel-picado {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 34px;
+    z-index: 3;
+    display: flex;
+    pointer-events: none;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.25);
+  }
+  .papel-picado .flag {
+    flex: 1 1 0;
+    min-width: 26px;
+    height: 28px;
+    margin: 0 1px;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    opacity: 0.85;
+  }
+  .papel-picado .flag:nth-child(3n+1) { background: #006341; }
+  .papel-picado .flag:nth-child(3n+2) { background: #ffffff; }
+  .papel-picado .flag:nth-child(3n) { background: #ce1126; }
+  .fiesta-banner {
+    margin: 0 0 1.5rem;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: linear-gradient(90deg, rgba(0, 99, 65, 0.18), rgba(255, 255, 255, 0.06), rgba(206, 17, 38, 0.18));
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  #fiesta-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
 </style>
 </head>
 <body>
@@ -410,5 +450,6 @@
   <script src="js/music.js"></script>
   <script src="js/exchange-rate.js"></script>
   <script src="js/countdown.js"></script>
+  <script src="js/fiesta.js"></script>
 </body>
 </html>
