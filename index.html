@@ -95,6 +95,46 @@
     font-size: 0.78rem;
     color: var(--muted);
   }
+  .countdown {
+    margin-top: 3.5rem;
+  }
+  .countdown h2 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .mx-flag {
+    display: flex;
+    width: 130px;
+    height: 78px;
+    margin: 0 auto 1rem;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .mx-flag span {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mx-flag span:nth-child(1) { background: #006341; }
+  .mx-flag span:nth-child(2) { background: #ffffff; font-size: 1.4rem; }
+  .mx-flag span:nth-child(3) { background: #ce1126; }
+  .countdown-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+  .countdown-label {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 0.35rem 0 0;
+  }
   .dog {
     margin-top: 3.5rem;
   }
@@ -260,6 +300,15 @@
       <a class="contact-link" href="https://etoro.tw/3RIu6vW" target="_blank" rel="noopener sponsored">Happy investing!<span id="usd-mxn-rate" class="rate"></span></a>
       <a class="contact-link" href="#photos" id="nav-photos">Photos</a>
     </div>
+    <section class="countdown">
+      <h2>Countdown to Sept 16</h2>
+      <div class="mx-flag" role="img" aria-label="Flag of Mexico">
+        <span></span><span>&#129413;</span><span></span>
+      </div>
+      <p class="countdown-text" id="countdown-text">Loading&hellip;</p>
+      <p class="countdown-label">until Mexico's Independence Day</p>
+    </section>
+
     <section class="dog">
       <h2>Meet the dog</h2>
       <img src="dog.jpg" alt="Guido's dog">
@@ -360,5 +409,6 @@
   <script src="js/nav.js"></script>
   <script src="js/music.js"></script>
   <script src="js/exchange-rate.js"></script>
+  <script src="js/countdown.js"></script>
 </body>
 </html>
