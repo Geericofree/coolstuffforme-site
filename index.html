@@ -355,6 +355,48 @@
     z-index: 0;
     pointer-events: none;
   }
+  .moon {
+    margin-top: 3.5rem;
+  }
+  .moon h2 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .moon-emoji {
+    font-size: 4rem;
+    margin: 0 auto 0.75rem;
+    line-height: 1;
+  }
+  .moon-phase-name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+  .moon-percent {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 0.35rem 0 0;
+  }
+  .moon-bar {
+    width: 100%;
+    max-width: 220px;
+    height: 6px;
+    margin: 1rem auto 0;
+    border-radius: 3px;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .moon-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.5s ease;
+  }
 </style>
 </head>
 <body>
@@ -410,6 +452,14 @@
     <div class="visits">
       <img src="https://visitor-badge.laobi.icu/badge?page_id=coolstuffforme.net" alt="visitor count" />
     </div>
+
+    <section class="moon">
+      <h2>Moon Phase</h2>
+      <div class="moon-emoji" id="moon-emoji" role="img" aria-label="Moon phase">&#127761;</div>
+      <p class="moon-phase-name" id="moon-phase-name">Loading&hellip;</p>
+      <p class="moon-percent" id="moon-percent"></p>
+      <div class="moon-bar"><div class="moon-bar-fill" id="moon-bar-fill"></div></div>
+    </section>
 
     <footer>&copy; 2026 Guido Rico</footer>
   </main>
@@ -492,5 +542,6 @@
   <script src="js/countdown.js"></script>
   <script src="js/fiesta.js"></script>
   <script src="js/halloween.js"></script>
+  <script src="js/moon.js"></script>
 </body>
 </html>
