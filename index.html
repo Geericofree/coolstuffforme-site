@@ -397,6 +397,108 @@
     width: 0%;
     transition: width 0.5s ease;
   }
+  #view-game {
+    max-width: 520px;
+  }
+  .pong-title {
+    font-family: "Courier New", Courier, monospace;
+    letter-spacing: 0.12em;
+  }
+  .pong-tagline {
+    font-family: "Courier New", Courier, monospace;
+    color: #3ef25c;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: -0.75rem 0 1.5rem;
+    text-shadow: 0 0 6px rgba(62, 242, 92, 0.5);
+  }
+  .pong-score {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin: 0 0 1rem;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #eafff0;
+    text-shadow: 0 0 8px rgba(62, 242, 92, 0.45);
+  }
+  .pong-score span {
+    min-width: 2ch;
+    text-align: center;
+  }
+  .pong-score .vs {
+    color: #3ef25c;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-shadow: none;
+    align-self: center;
+  }
+  .pong-screen {
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto;
+    border-radius: 4px;
+    padding: 10px;
+    background: #000;
+    border: 3px solid #2a2a2a;
+    box-shadow: 0 0 0 1px #0a0a0a, 0 0 26px rgba(62, 242, 92, 0.12), inset 0 0 30px rgba(0, 0, 0, 0.9);
+  }
+  #pong-canvas {
+    width: 100%;
+    aspect-ratio: 8 / 5;
+    display: block;
+    background: #000;
+    image-rendering: pixelated;
+  }
+  .pong-scanlines {
+    position: absolute;
+    inset: 10px;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 1px,
+      rgba(0, 0, 0, 0.25) 2px,
+      rgba(0, 0, 0, 0.25) 3px
+    );
+    mix-blend-mode: multiply;
+    border-radius: 2px;
+  }
+  .pong-hint {
+    color: var(--muted);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    margin: 1rem 0 0;
+    line-height: 1.6;
+  }
+  .pong-controls {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+  }
+  .pong-btn {
+    color: #3ef25c;
+    background: transparent;
+    border: 1px solid #1f5c2c;
+    border-radius: 3px;
+    padding: 0.55rem 1.1rem;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .pong-btn:hover {
+    background: rgba(62, 242, 92, 0.08);
+    border-color: #3ef25c;
+  }
 </style>
 </head>
 <body>
@@ -414,6 +516,7 @@
       <a class="contact-link" href="https://wa.me/525543401033" target="_blank" rel="noopener">WhatsApp: +52 55 4340 1033</a>
       <a class="contact-link" href="https://etoro.tw/3RIu6vW" target="_blank" rel="noopener sponsored">Happy investing!<span id="usd-mxn-rate" class="rate"></span></a>
       <a class="contact-link" href="#photos" id="nav-photos">Photos</a>
+      <a class="contact-link" href="#game" id="nav-game">Mini Game &mdash; Pong</a>
     </div>
     <section class="countdown">
       <h2>Countdown to Sept 16</h2>
@@ -532,6 +635,25 @@
     <footer>&copy; 2026 Guido Rico</footer>
   </main>
 
+  <main id="view-game" style="display:none;">
+    <a class="back" href="#" id="nav-home-game">&larr; Back</a>
+    <h1 class="pong-title">PONG</h1>
+    <p class="pong-tagline">Insert Coin &mdash; 1 Player</p>
+    <div class="pong-score">
+      <span id="pong-score-player">0</span>
+      <span class="vs">VS CPU</span>
+      <span id="pong-score-cpu">0</span>
+    </div>
+    <div class="pong-screen">
+      <canvas id="pong-canvas" width="480" height="300"></canvas>
+      <div class="pong-scanlines"></div>
+    </div>
+    <p class="pong-hint">Drag / touch, move mouse, or use &uarr; &darr; (W/S) to move your paddle (left). First to 7 wins. Tap the screen or press Space to serve.</p>
+    <div class="pong-controls">
+      <button class="pong-btn" id="pong-restart" type="button">Restart</button>
+    </div>
+  </main>
+
   <button id="music-toggle" type="button">&#9658; Play Music</button>
   <iframe id="yt-audio" title="Background music" style="position:absolute;width:0;height:0;border:0;" allow="autoplay"></iframe>
 
@@ -543,6 +665,7 @@
   <script src="js/fiesta.js"></script>
   <script src="js/halloween.js"></script>
   <script src="js/moon.js"></script>
+  <script src="js/pong.js"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5f05ab2571b04236b0832d2d870cec49"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
