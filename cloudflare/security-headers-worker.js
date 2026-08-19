@@ -44,12 +44,7 @@ async function handleExchangeRate(env) {
   });
 
   if (!upstreamResponse.ok) {
-    const bodyText = await upstreamResponse.text();
-    return new Response(JSON.stringify({
-      error: 'upstream error',
-      status: upstreamResponse.status,
-      body: bodyText.slice(0, 500),
-    }), {
+    return new Response(JSON.stringify({ error: 'upstream error' }), {
       status: 502,
       headers: { 'Content-Type': 'application/json' },
     });
