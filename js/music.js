@@ -26,12 +26,23 @@
     btn.innerHTML = on ? '&#10074;&#10074; Pause Music' : '&#9658; Play Music';
   }
   function playAudible() {
-    load();
-    postCommand('unMute');
-    postCommand('playVideo');
+    if (loaded) {
+      postCommand('unMute');
+      postCommand('playVideo');
+    } else {
+      // A fresh load needs the iframe to finish loading before it'll
+      // accept postMessage commands; sending them immediately after
+      // setting src is a no-op since the player isn't listening yet.
+      frame.onload = function () {
+        postCommand('unMute');
+        postCommand('playVideo');
+      };
+      load();
+    }
     setAudible(true);
   }
   function stopAudible() {
+    frame.onload = null;
     frame.src = '';
     loaded = false;
     setAudible(false);
