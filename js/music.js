@@ -3,7 +3,12 @@
   var frame = document.getElementById('yt-audio');
   var loaded = false;
   var audible = false;
-  var src = 'https://www.youtube.com/embed/m3stLwd1CnQ?list=RDm3stLwd1CnQ&autoplay=1&mute=1&playsinline=1&enablejsapi=1&modestbranding=1&rel=0';
+  // `list=RDm3stLwd1CnQ` (a YouTube-generated "Mix" playlist) throws
+  // Error 153 when embedded on third-party sites -- Mixes are commonly
+  // not embeddable outside youtube.com, unlike a single regular video.
+  // Loop the plain video instead via loop=1 + playlist=<same id>
+  // (YouTube requires the playlist param to loop a single video).
+  var src = 'https://www.youtube.com/embed/m3stLwd1CnQ?autoplay=1&mute=1&playsinline=1&enablejsapi=1&modestbranding=1&rel=0&loop=1&playlist=m3stLwd1CnQ';
 
   // Safari (iOS) blocks unmuted autoplay through cross-origin iframes
   // almost unconditionally, even inside a user-gesture handler, and
