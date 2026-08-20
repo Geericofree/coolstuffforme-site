@@ -2,15 +2,15 @@
   var el = document.getElementById('usd-mxn-rate');
   if (!el) return;
 
-  fetch('/api/usd-mxn')
+  fetch('https://api.frankfurter.dev/v1/latest?from=USD&to=MXN')
     .then(function (res) {
       if (!res.ok) throw new Error('bad response');
       return res.json();
     })
     .then(function (data) {
-      var rate = data && data.rate;
+      var rate = data && data.rates && data.rates.MXN;
       if (!rate) return;
-      el.textContent = '1 USD = ' + rate.toFixed(2) + ' MXN (DOF)';
+      el.textContent = '1 USD = ' + rate.toFixed(2) + ' MXN';
     })
     .catch(function () {
       // Leave the button as-is if the rate can't be fetched.
