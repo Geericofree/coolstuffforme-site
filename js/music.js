@@ -10,17 +10,15 @@
   // (YouTube requires the playlist param to loop a single video).
   var src = 'https://www.youtube.com/embed/m3stLwd1CnQ?autoplay=1&mute=1&playsinline=1&enablejsapi=1&modestbranding=1&rel=0&loop=1&playlist=m3stLwd1CnQ';
 
-  // Safari (iOS) blocks unmuted autoplay through cross-origin iframes
-  // almost unconditionally, even inside a user-gesture handler, and
-  // ignores postMessage-driven unmute commands too since they don't
-  // originate from a real tap inside the player's own document. The
-  // iframe is kept genuinely visible (not 0x0) so that on browsers
-  // where our postMessage trick is ignored, the visitor can fall back
-  // to tapping YouTube's own native unmute icon directly on the video
-  // -- a real same-document gesture, which is honored reliably. The
-  // button label tracks audible state, not load state, so the
-  // visitor's first tap on it unmutes rather than stopping a video
-  // they were never able to hear.
+  // The iframe is audio-only (0x0, hidden) -- there's no video to show,
+  // just background music. Autoplay muted (universally allowed), then
+  // unmute via the YouTube postMessage API once a real interaction
+  // happens. Note: Safari (iOS) ignores this postMessage-driven unmute
+  // since it doesn't originate from a gesture inside the player's own
+  // document, so sound may not play on some mobile browsers -- that's
+  // an accepted tradeoff for keeping the player invisible. The button
+  // label tracks audible state, not load state, so the visitor's first
+  // tap on it unmutes rather than stopping a video they never heard.
   function postCommand(func) {
     if (!frame.contentWindow) return;
     frame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: func, args: [] }), '*');
