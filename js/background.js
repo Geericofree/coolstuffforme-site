@@ -1,8 +1,18 @@
 (function () {
   var canvas = document.getElementById('bg-canvas');
   var ctx = canvas.getContext('2d');
-  var BG = '#0e0e0f';
   var MAX_ALPHA = 0.16;
+
+  var lightQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)');
+  var BG = '#0e0e0f';
+  var FX = '255,255,255';
+  function syncTheme() {
+    var isLight = !!(lightQuery && lightQuery.matches);
+    BG = isLight ? '#f7f7f7' : '#0e0e0f';
+    FX = isLight ? '0,0,0' : '255,255,255';
+  }
+  syncTheme();
+  if (lightQuery && lightQuery.addEventListener) lightQuery.addEventListener('change', syncTheme);
 
   var SCENES = ['matrix', 'mainframe', 'stocks', 'security'];
   var SCENE_HOLD = 7000;
@@ -38,7 +48,7 @@
         var yy = s.y - j * 18;
         if (yy < 0 || yy > canvas.height) continue;
         var fade = 1 - j / s.len;
-        ctx.fillStyle = 'rgba(255,255,255,' + (a * MAX_ALPHA * fade).toFixed(3) + ')';
+        ctx.fillStyle = 'rgba(' + FX + ',' + (a * MAX_ALPHA * fade).toFixed(3) + ')';
         ctx.fillText(matrixChars[Math.floor(Math.random() * matrixChars.length)], s.x, yy);
       }
     });
@@ -82,7 +92,7 @@
     for (var i = 0; i < mfBuffer.length; i++) {
       var y = i * MF_LINE_H - mfOffset;
       if (y < -MF_LINE_H || y > canvas.height + MF_LINE_H) continue;
-      ctx.fillStyle = 'rgba(255,255,255,' + (a * MAX_ALPHA * 0.45).toFixed(3) + ')';
+      ctx.fillStyle = 'rgba(' + FX + ',' + (a * MAX_ALPHA * 0.45).toFixed(3) + ')';
       ctx.fillText(mfBuffer[i], 18, y);
     }
     ctx.restore();
@@ -133,7 +143,7 @@
       band.candles.forEach(function (c, i) {
         var x = i * 11 - band.offset;
         if (x < -11 || x > canvas.width + 11) return;
-        ctx.strokeStyle = 'rgba(255,255,255,' + (a * MAX_ALPHA * 0.9).toFixed(3) + ')';
+        ctx.strokeStyle = 'rgba(' + FX + ',' + (a * MAX_ALPHA * 0.9).toFixed(3) + ')';
         ctx.beginPath();
         ctx.moveTo(x, priceToY(c.high));
         ctx.lineTo(x, priceToY(c.low));
@@ -169,7 +179,7 @@
         var n1 = nodes[i], n2 = nodes[j];
         var d = Math.hypot(n1.x - n2.x, n1.y - n2.y);
         if (d < 260) {
-          ctx.strokeStyle = 'rgba(255,255,255,' + (a * MAX_ALPHA * 0.35).toFixed(3) + ')';
+          ctx.strokeStyle = 'rgba(' + FX + ',' + (a * MAX_ALPHA * 0.35).toFixed(3) + ')';
           ctx.beginPath();
           ctx.moveTo(n1.x, n1.y);
           ctx.lineTo(n2.x, n2.y);
@@ -179,14 +189,14 @@
     }
     nodes.forEach(function (n) {
       var pulse = 0.5 + 0.5 * Math.sin(t * 0.8 + n.phase);
-      ctx.fillStyle = 'rgba(255,255,255,' + (a * MAX_ALPHA * (0.5 + pulse * 0.6)).toFixed(3) + ')';
+      ctx.fillStyle = 'rgba(' + FX + ',' + (a * MAX_ALPHA * (0.5 + pulse * 0.6)).toFixed(3) + ')';
       ctx.beginPath();
       ctx.arc(n.x, n.y, 2 + pulse * 1.5, 0, Math.PI * 2);
       ctx.fill();
     });
     var radius = 70, cx = canvas.width - radius - 24, cy = canvas.height - radius - 24;
     var sweep = (Date.now() / 1000) % (Math.PI * 2);
-    ctx.strokeStyle = 'rgba(255,255,255,' + (a * MAX_ALPHA * 0.4).toFixed(3) + ')';
+    ctx.strokeStyle = 'rgba(' + FX + ',' + (a * MAX_ALPHA * 0.4).toFixed(3) + ')';
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);
     ctx.stroke();
