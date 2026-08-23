@@ -3,11 +3,10 @@
   var ctx = canvas.getContext('2d');
   var MAX_ALPHA = 0.16;
 
-  var lightQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)');
   var BG = '#0e0e0f';
   var FX = '255,255,255';
   function syncTheme() {
-    var isLight = !!(lightQuery && lightQuery.matches);
+    var isLight = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
     BG = isLight ? '#f7f7f7' : '#0e0e0f';
     FX = isLight ? '0,0,0' : '255,255,255';
   }
