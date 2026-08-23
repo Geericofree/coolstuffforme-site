@@ -291,6 +291,34 @@
     color: var(--muted);
     font-weight: 600;
   }
+  #music-toggle {
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 2;
+    background: var(--bg);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.55rem 1rem;
+    font-size: 0.8rem;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  #music-toggle:hover {
+    color: var(--text);
+    border-color: #3a3a3a;
+  }
+  #yt-audio {
+    position: fixed;
+    bottom: 4rem;
+    right: 1.25rem;
+    z-index: 2;
+    width: 120px;
+    height: 68px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
   .papel-picado {
     position: fixed;
     top: 0;
@@ -670,8 +698,12 @@
     </div>
   </main>
 
+  <button id="music-toggle" type="button">&#9658; Play Music</button>
+  <iframe id="yt-audio" title="Background music" allow="autoplay"></iframe>
+
   <script src="js/background.js"></script>
   <script src="js/nav.js"></script>
+  <script src="js/music.js"></script>
   <script src="js/exchange-rate.js"></script>
   <script src="js/countdown.js"></script>
   <script src="js/fiesta.js"></script>
