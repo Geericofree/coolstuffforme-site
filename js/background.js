@@ -11,8 +11,6 @@
     BG = isLight ? '#f7f7f7' : '#0e0e0f';
     FX = isLight ? '0,0,0' : '255,255,255';
   }
-  syncTheme();
-  if (lightQuery && lightQuery.addEventListener) lightQuery.addEventListener('change', syncTheme);
 
   var SCENES = ['matrix', 'mainframe', 'stocks', 'security'];
   var SCENE_HOLD = 7000;
@@ -219,6 +217,7 @@
   window.addEventListener('resize', initAll);
 
   function frame() {
+    syncTheme();
     var now = Date.now();
     if (!sceneStart) sceneStart = now;
     var elapsed = now - sceneStart;
