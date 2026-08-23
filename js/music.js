@@ -3,8 +3,15 @@
   var frame = document.getElementById('yt-audio');
   var loaded = false;
   var audible = false;
-  var src = 'https://www.youtube.com/embed/m3stLwd1CnQ?list=RDm3stLwd1CnQ&autoplay=1&mute=1&playsinline=1&enablejsapi=1';
+  // `list=RDm3stLwd1CnQ` (a YouTube-generated "Mix" playlist) throws
+  // Error 153 when embedded on third-party sites -- loop the plain
+  // video instead via loop=1 + playlist=<same id>.
+  var src = 'https://www.youtube.com/embed/m3stLwd1CnQ?autoplay=1&mute=1&playsinline=1&enablejsapi=1&loop=1&playlist=m3stLwd1CnQ';
 
+  // Testing whether a genuinely 0x0 iframe silently prevents YouTube's
+  // player from ever initializing playback at all (some players treat
+  // zero-size as "not visible" and skip loading media as a bandwidth/
+  // abuse safeguard) -- kept visibly sized for now to isolate that.
   // Safari (iOS) blocks unmuted autoplay through cross-origin iframes
   // almost unconditionally, even inside a user-gesture handler. The
   // reliable pattern is: autoplay muted (always allowed), then unmute
