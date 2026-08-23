@@ -10,7 +10,7 @@ const CSP = [
   "script-src 'self' https://utteranc.es https://static.cloudflareinsights.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://visitor-badge.laobi.icu",
-  "frame-src https://utteranc.es https://www.youtube.com",
+  "frame-src https://utteranc.es https://www.youtube.com https://www.youtube-nocookie.com",
   "font-src 'self'",
   "connect-src 'self' https://api.frankfurter.dev",
   "object-src 'none'",
