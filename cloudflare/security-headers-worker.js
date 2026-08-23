@@ -7,7 +7,10 @@
 
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' https://utteranc.es https://static.cloudflareinsights.com",
+  // 'unsafe-inline' is required for Cloudflare's own bot-challenge platform
+  // (window.__CF$cv$params, injected when Bot Fight Mode is on) — its inline
+  // bootstrap script carries per-request tokens, so it can't be hash-pinned.
+  "script-src 'self' 'unsafe-inline' https://utteranc.es https://static.cloudflareinsights.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://visitor-badge.laobi.icu https://i.ytimg.com",
   "frame-src https://utteranc.es https://www.youtube.com https://www.youtube-nocookie.com",
