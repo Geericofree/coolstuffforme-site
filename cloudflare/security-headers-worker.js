@@ -1,9 +1,9 @@
 // Cloudflare Worker: adds security response headers to coolstuffforme.net.
 // GitHub Pages (the origin) can't set custom headers, so this runs in front of it.
 //
-// Deploy: Cloudflare dashboard -> Workers & Pages -> Create -> Worker,
-// paste this in, deploy, then add routes coolstuffforme.net/* and
-// www.coolstuffforme.net/* to this worker (Settings -> Domains & Routes).
+// Deployed via Cloudflare Workers Builds from this repo's wrangler.toml.
+// Routes coolstuffforme.net/* and www.coolstuffforme.net/* are configured
+// in the Cloudflare dashboard (Settings -> Domains & Routes).
 
 const CSP = [
   "default-src 'self'",
