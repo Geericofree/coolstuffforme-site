@@ -1,3 +1,14 @@
 name = "coolstuffforme-security-headers"
 main = "cloudflare/security-headers-worker.js"
 compatibility_date = "2026-09-08"
+
+# Non-secret config for the /api/analytics endpoint (see the setup comment
+# at the top of cloudflare/security-headers-worker.js). CF_API_TOKEN and
+# DASHBOARD_KEY are secrets — set them with `wrangler secret put`, never here.
+[vars]
+# Cloudflare account ID that owns coolstuffforme.net (dashboard -> any zone
+# overview page -> right sidebar). Fill this in before the dashboard works.
+CF_ACCOUNT_TAG = ""
+# Web Analytics "site tag" — this is the same token already public in
+# index.html's beacon snippet (data-cf-beacon), so it's safe to commit.
+CF_SITE_TAG = "5f05ab2571b04236b0832d2d870cec49"
