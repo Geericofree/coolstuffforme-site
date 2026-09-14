@@ -588,19 +588,19 @@
     <h1>Guido Rico</h1>
     <p class="bio">Working at the intersection of finance and technology.</p>
     <div class="contact">
-      <a class="contact-link" href="mailto:guidorico@icloud.com">guidorico@icloud.com</a>
-      <a class="contact-link" href="https://www.linkedin.com/in/gricomndz/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="contact-link" href="https://profile.indeed.com/p/guidoricom-4yrz861" target="_blank" rel="noopener">Indeed</a>
-      <a class="contact-link" href="sms:+525543401033">SMS: +52 55 4340 1033</a>
-      <a class="contact-link" href="https://pin.it/1Jx5ilnXi" target="_blank" rel="noopener">Pinterest</a>
-      <a class="contact-link" href="https://wa.me/525543401033" target="_blank" rel="noopener">WhatsApp: +52 55 4340 1033</a>
+      <a class="contact-link" href="mailto:guidorico@icloud.com" data-track="contact-email">guidorico@icloud.com</a>
+      <a class="contact-link" href="https://www.linkedin.com/in/gricomndz/" target="_blank" rel="noopener" data-track="contact-linkedin">LinkedIn</a>
+      <a class="contact-link" href="https://profile.indeed.com/p/guidoricom-4yrz861" target="_blank" rel="noopener" data-track="contact-indeed">Indeed</a>
+      <a class="contact-link" href="sms:+525543401033" data-track="contact-sms">SMS: +52 55 4340 1033</a>
+      <a class="contact-link" href="https://pin.it/1Jx5ilnXi" target="_blank" rel="noopener" data-track="contact-pinterest">Pinterest</a>
+      <a class="contact-link" href="https://wa.me/525543401033" target="_blank" rel="noopener" data-track="contact-whatsapp">WhatsApp: +52 55 4340 1033</a>
       <a class="contact-link" href="#photos" id="nav-photos">Photos</a>
       <a class="contact-link" href="#game" id="nav-game">Mini Game &mdash; Pong</a>
     </div>
 
     <div class="sponsor">
       <p class="sponsor-label">Sponsored</p>
-      <a class="contact-link" id="etoro-link" href="https://etoro.tw/3RIu6vW" target="_blank" rel="noopener sponsored">Trade with eToro<span id="usd-mxn-rate" class="rate"></span><span id="big-three-rates" class="rate"></span></a>
+      <a class="contact-link" id="etoro-link" href="https://etoro.tw/3RIu6vW" target="_blank" rel="noopener sponsored" data-track="sponsor-etoro">Trade with eToro<span id="usd-mxn-rate" class="rate"></span><span id="big-three-rates" class="rate"></span></a>
       <p class="sponsor-disclaimer">CFDs are complex instruments and come with a high risk of losing money rapidly due to leverage. 51% of retail investor accounts lose money when trading CFDs with this provider. You should consider whether you understand how CFDs work and whether you can afford to take the high risk of losing your money. eToro also offers direct investing in stocks and cryptoassets, which are not leveraged.</p>
     </div>
 
@@ -747,12 +747,13 @@
     </div>
     <p class="pong-hint">Drag / touch, move mouse, or use &uarr; &darr; (W/S) to move your paddle (left). First to 7 wins. Tap the screen or press Space to serve.</p>
     <div class="pong-controls">
-      <button class="pong-btn" id="pong-restart" type="button">Restart</button>
+      <button class="pong-btn" id="pong-restart" type="button" data-track="pong-restart">Restart</button>
     </div>
   </main>
 
   <script src="js/background.js"></script>
   <script src="js/nav.js"></script>
+  <script src="js/analytics.js"></script>
   <script src="js/exchange-rate.js"></script>
   <script src="js/big-three.js"></script>
   <script src="js/countdown.js"></script>
