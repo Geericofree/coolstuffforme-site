@@ -2,12 +2,15 @@
   var views = {
     home: document.getElementById('view-home'),
     photos: document.getElementById('view-photos'),
-    game: document.getElementById('view-game')
+    game: document.getElementById('view-game'),
+    propaganda: document.getElementById('view-propaganda')
   };
   var navPhotos = document.getElementById('nav-photos');
   var navGame = document.getElementById('nav-game');
   var navHome = document.getElementById('nav-home');
   var navHomeGame = document.getElementById('nav-home-game');
+  var navPropaganda = document.getElementById('nav-propaganda');
+  var navHomePropaganda = document.getElementById('nav-home-propaganda');
 
   var mainVideo = document.getElementById('featured-video-iframe');
   var photosVideo = document.getElementById('photos-video-iframe');
@@ -84,19 +87,29 @@
     e.preventDefault();
     show('home');
   });
+  navPropaganda.addEventListener('click', function (e) {
+    e.preventDefault();
+    show('propaganda');
+  });
+  navHomePropaganda.addEventListener('click', function (e) {
+    e.preventDefault();
+    show('home');
+  });
 
   function syncToHash() {
     if (location.hash === '#photos') {
       show('photos');
     } else if (location.hash === '#game') {
       show('game');
+    } else if (location.hash === '#propaganda') {
+      show('propaganda');
     } else {
       show('home');
     }
   }
   window.addEventListener('popstate', syncToHash);
   window.addEventListener('hashchange', syncToHash);
-  if (location.hash === '#photos' || location.hash === '#game') {
+  if (location.hash === '#photos' || location.hash === '#game' || location.hash === '#propaganda') {
     syncToHash();
   }
 })();
