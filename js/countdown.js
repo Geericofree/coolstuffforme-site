@@ -2,8 +2,10 @@
   var TARGETS = [
     {
       id: 'countdown-text',
+      sectionId: 'section-independence',
       month: 8, // September
       day: 16,
+      showFrom: [7, 1], // Aug 1 through the day itself
       reachedText: '¡Feliz Día de la Independencia!'
     },
     {
@@ -11,8 +13,25 @@
       month: 9, // October
       day: 31,
       reachedText: 'Happy Halloween! 🎃👻'
+    },
+    {
+      id: 'countdown-revolution-text',
+      sectionId: 'section-revolution',
+      month: 10, // November
+      day: 20,
+      showFrom: [8, 17], // right after Independence Day through the day itself
+      reachedText: '¡Viva la Revolución Mexicana! 🇲🇽'
     }
   ];
+
+  // A section with showFrom is only visible from that date through its target day.
+  function inWindow(config, now) {
+    if (!config.showFrom) return true;
+    var today = now.getMonth() * 100 + now.getDate();
+    var from = config.showFrom[0] * 100 + config.showFrom[1];
+    var to = config.month * 100 + config.day;
+    return today >= from && today <= to;
+  }
 
   function nextTarget(month, day) {
     var now = new Date();
@@ -32,18 +51,27 @@
     return days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
   }
 
+  var now = new Date();
   var active = TARGETS.map(function (t) {
     return { el: document.getElementById(t.id), config: t };
   }).filter(function (item) {
-    return !!item.el;
+    if (!item.el) return false;
+    var section = item.config.sectionId && document.getElementById(item.config.sectionId);
+    var visible = inWindow(item.config, now);
+    if (section) section.hidden = !visible;
+    return visible;
   });
 
   if (!active.length) return;
 
   function update() {
     active.forEach(function (item) {
-      var diff = nextTarget(item.config.month, item.config.day).getTime() - Date.now();
-      item.el.textContent = diff <= 0 ? item.config.reachedText : format(diff);
+      var now = new Date();
+      if (now.getMonth() === item.config.month && now.getDate() === item.config.day) {
+        item.el.textContent = item.config.reachedText;
+        return;
+      }
+      item.el.textContent = format(nextTarget(item.config.month, item.config.day).getTime() - now.getTime());
     });
   }
 

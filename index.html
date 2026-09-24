@@ -181,6 +181,43 @@
     font-size: 0.85rem;
     margin: 0.35rem 0 0;
   }
+  .muertos-days {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem auto 0;
+    max-width: 22rem;
+    text-align: left;
+    font-size: 0.85rem;
+  }
+  .muertos-days li {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: 6px;
+    color: var(--muted);
+  }
+  .muertos-date {
+    flex: 0 0 3.6rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .muertos-days li.is-today {
+    color: var(--text);
+    background: rgba(255, 140, 0, 0.14);
+    box-shadow: inset 3px 0 0 #ff8c00;
+  }
+  .muertos-days li.is-past {
+    opacity: 0.5;
+  }
+  .revolution-photo {
+    display: block;
+    width: 130px;
+    height: 78px;
+    margin: 0 auto 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    object-fit: cover;
+  }
   .dog {
     margin-top: 3.5rem;
   }
@@ -604,7 +641,7 @@
       <p class="sponsor-disclaimer">CFDs are complex instruments and come with a high risk of losing money rapidly due to leverage. 51% of retail investor accounts lose money when trading CFDs with this provider. You should consider whether you understand how CFDs work and whether you can afford to take the high risk of losing your money. eToro also offers direct investing in stocks and cryptoassets, which are not leveraged.</p>
     </div>
 
-    <section class="countdown">
+    <section class="countdown" id="section-independence" hidden>
       <h2>Countdown to Sept 16</h2>
       <div class="mx-flag" role="img" aria-label="Flag of Mexico">
         <span></span><span>&#129413;</span><span></span>
@@ -618,6 +655,29 @@
       <div class="hw-icon" role="img" aria-label="Halloween">&#127875;</div>
       <p class="countdown-text" id="countdown-halloween-text">Loading&hellip;</p>
       <p class="countdown-label">until Halloween</p>
+    </section>
+
+    <section class="countdown muertos" id="section-muertos" hidden>
+      <h2>D&iacute;a de Muertos</h2>
+      <div class="hw-icon" role="img" aria-label="Marigold and sugar skull">&#127804;&#128128;&#127804;</div>
+      <p class="countdown-text" id="muertos-text">Loading&hellip;</p>
+      <p class="countdown-label" id="muertos-label">until the first ofrenda</p>
+      <ol class="muertos-days" id="muertos-days">
+        <li data-month="9" data-day="27"><span class="muertos-date">Oct 27</span><span class="muertos-who">&#128062; Mascotas &mdash; our pets</span></li>
+        <li data-month="9" data-day="28"><span class="muertos-date">Oct 28</span><span class="muertos-who">&#9888;&#65039; Those lost in accidents or tragedy</span></li>
+        <li data-month="9" data-day="29"><span class="muertos-date">Oct 29</span><span class="muertos-who">&#127754; Los ahogados &mdash; those who drowned</span></li>
+        <li data-month="9" data-day="30"><span class="muertos-date">Oct 30</span><span class="muertos-who">&#128367;&#65039; &Aacute;nimas solas &mdash; the forgotten souls</span></li>
+        <li data-month="9" data-day="31"><span class="muertos-date">Oct 31</span><span class="muertos-who">&#128124; Children who died before baptism</span></li>
+        <li data-month="10" data-day="1"><span class="muertos-date">Nov 1</span><span class="muertos-who">&#127880; Todos Santos &mdash; los angelitos</span></li>
+        <li data-month="10" data-day="2"><span class="muertos-date">Nov 2</span><span class="muertos-who">&#128128; Fieles Difuntos &mdash; the adults</span></li>
+      </ol>
+    </section>
+
+    <section class="countdown" id="section-revolution" hidden>
+      <h2>Countdown to Nov 20</h2>
+      <img class="revolution-photo" src="revolution.jpg" alt="Pancho Villa and Emiliano Zapata at the National Palace, 1914">
+      <p class="countdown-text" id="countdown-revolution-text">Loading&hellip;</p>
+      <p class="countdown-label">until Mexico's Revolution Day</p>
     </section>
 
     <section class="dog">
@@ -757,6 +817,7 @@
   <script src="js/exchange-rate.js"></script>
   <script src="js/big-three.js"></script>
   <script src="js/countdown.js"></script>
+  <script src="js/muertos.js"></script>
   <script src="js/featured-video.js"></script>
   <script src="js/fiesta.js"></script>
   <script src="js/halloween.js"></script>
