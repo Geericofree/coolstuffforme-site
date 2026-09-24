@@ -25,6 +25,15 @@ const CSP = [
 
 export default {
   async fetch(request) {
+    // GitHub Pages only holds a certificate for the CNAME'd www host, so a
+    // proxied request for the bare domain fails with Cloudflare 526 — send
+    // it to www before it ever reaches the origin.
+    const url = new URL(request.url);
+    if (url.hostname === 'coolstuffforme.net') {
+      url.hostname = 'www.coolstuffforme.net';
+      return Response.redirect(url.toString(), 301);
+    }
+
     const response = await fetch(request);
     const headers = new Headers(response.headers);
 
