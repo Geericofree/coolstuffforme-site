@@ -15,10 +15,18 @@
     if (h1) {
       var greet = document.createElement('p');
       greet.className = 'halloween-banner';
-      greet.textContent = '🧬 Happy Halloween — Containment Breach in Sector 7 👁️';
+      greet.textContent = '🎃 Happy Halloween · ¡Comienza el Día de Muertos! 💀';
       h1.insertAdjacentElement('afterend', greet);
     }
   }
+
+  // Oct 31 is also the first big night of Día de Muertos, so string papel picado too.
+  var banner = document.createElement('div');
+  banner.className = 'papel-picado muertos-picado';
+  for (var f = 0; f < 20; f++) {
+    banner.appendChild(document.createElement('div')).className = 'flag';
+  }
+  document.body.appendChild(banner);
 
   var fog = document.createElement('div');
   fog.className = 'halloween-fog';
@@ -29,7 +37,8 @@
   document.body.appendChild(canvas);
   var ctx = canvas.getContext('2d');
 
-  var bats = [], spiders = [], strands = [], eyes = [];
+  var bats = [], spiders = [], petals = [];
+  var PETAL_COLORS = ['#ff8c00', '#ffb300', '#ff6f00', '#ffd54f'];
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -64,25 +73,18 @@
     }
   }
 
-  function initStrands() {
-    strands = [];
-    for (var i = 0; i < 3; i++) {
-      strands.push({
+  function initPetals() {
+    petals = [];
+    var count = Math.floor((canvas.width * canvas.height) / 22000) + 10;
+    for (var i = 0; i < count; i++) {
+      petals.push({
         x: Math.random() * canvas.width,
-        y: canvas.height + Math.random() * 200,
-        speed: 0.15 + Math.random() * 0.15,
-        phase: Math.random() * Math.PI * 2
-      });
-    }
-  }
-
-  function initEyes() {
-    eyes = [];
-    for (var i = 0; i < 4; i++) {
-      eyes.push({
-        x: Math.random() * canvas.width,
-        y: canvas.height * 0.3 + Math.random() * canvas.height * 0.6,
-        phase: Math.random() * Math.PI * 2
+        y: Math.random() * -canvas.height,
+        size: 3 + Math.random() * 3,
+        speed: 0.4 + Math.random() * 0.8,
+        sway: Math.random() * Math.PI * 2,
+        spin: Math.random() * Math.PI * 2,
+        color: PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)]
       });
     }
   }
@@ -128,38 +130,14 @@
     ctx.restore();
   }
 
-  function drawStrand(st, t) {
+  function drawPetal(p) {
     ctx.save();
-    ctx.strokeStyle = 'rgba(0,255,140,0.16)';
-    ctx.fillStyle = 'rgba(0,255,140,0.22)';
-    ctx.lineWidth = 1.3;
-    for (var i = 0; i < 90; i += 6) {
-      var yy = st.y - i;
-      if (yy < -20 || yy > canvas.height + 20) continue;
-      var ang = i * 0.35 + st.phase + t;
-      var dx = Math.sin(ang) * 10;
-      ctx.beginPath();
-      ctx.arc(st.x + dx, yy, 1.5, 0, Math.PI * 2);
-      ctx.fill();
-      if (i % 12 === 0) {
-        ctx.beginPath();
-        ctx.moveTo(st.x + dx, yy);
-        ctx.lineTo(st.x - dx, yy);
-        ctx.stroke();
-      }
-    }
-    ctx.restore();
-  }
-
-  function drawEye(e, t) {
-    var blink = Math.sin(t * 0.7 + e.phase) > 0.96 ? 0.15 : 1;
-    ctx.save();
-    ctx.fillStyle = 'rgba(170,255,120,0.45)';
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.spin);
+    ctx.globalAlpha = 0.7;
+    ctx.fillStyle = p.color;
     ctx.beginPath();
-    ctx.ellipse(e.x, e.y, 6, 3 * blink, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.ellipse(e.x + 16, e.y, 6, 3 * blink, 0, 0, Math.PI * 2);
+    ctx.ellipse(0, 0, p.size, p.size * 0.55, 0, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
   }
@@ -168,8 +146,7 @@
     resize();
     initBats();
     initSpiders();
-    initStrands();
-    initEyes();
+    initPetals();
   }
   initAll();
   window.addEventListener('resize', initAll);
@@ -178,13 +155,16 @@
     var t = Date.now() / 1000;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    strands.forEach(function (st) {
-      st.y -= st.speed;
-      if (st.y < -100) st.y = canvas.height + Math.random() * 100;
-      drawStrand(st, t);
+    petals.forEach(function (p) {
+      p.y += p.speed;
+      p.x += Math.sin(t + p.sway) * 0.4;
+      p.spin += 0.02;
+      if (p.y > canvas.height + 10) {
+        p.y = -10;
+        p.x = Math.random() * canvas.width;
+      }
+      drawPetal(p);
     });
-
-    eyes.forEach(function (e) { drawEye(e, t); });
 
     spiders.forEach(function (s) {
       s.t += 0.3 + Math.sin(t * 0.5 + s.x) * 0.2;
