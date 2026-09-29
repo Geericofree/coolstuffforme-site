@@ -745,6 +745,28 @@
     font-style: italic;
     margin: 0.8rem 0 0;
   }
+  /* ---- On sale ---- */
+  .sale-item {
+    margin: 2rem 0 0;
+    padding: 1.2rem;
+    border: 1px solid rgba(143, 143, 143, 0.35);
+    border-radius: 8px;
+    text-align: left;
+  }
+  .sale-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+  .sale-thumbs { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
+  .sale-thumbs img { width: 50%; cursor: pointer; opacity: 0.85; }
+  .sale-thumbs img:hover { opacity: 1; }
+  .sale-item h2 { margin: 1rem 0 0.2rem; font-size: 1.2rem; }
+  .sale-price { font-size: 1.35rem; font-weight: 700; margin: 0.3rem 0; }
+  .sale-price small { font-size: 0.85rem; font-weight: 400; color: var(--muted); }
+  .sale-item ul { color: var(--muted); padding-left: 1.2rem; margin: 0.6rem 0 1rem; }
+  .sale-item a.contact-link { display: inline-block; }
 </style>
 </head>
 <body>
@@ -763,6 +785,7 @@
       <a class="contact-link" href="#photos" id="nav-photos">Photos</a>
       <a class="contact-link" href="#game" id="nav-game">Mini Game &mdash; Pong</a>
       <a class="contact-link" href="#propaganda" id="nav-propaganda" data-track="nav-propaganda">Propaganda Posters</a>
+      <a class="contact-link" href="#sale" id="nav-sale" data-track="nav-sale">On Sale</a>
     </div>
 
     <div class="sponsor">
@@ -989,18 +1012,44 @@
     <footer>&copy; 2026 Guido Rico</footer>
   </main>
 
-  <script src="js/background.js?v=20260924"></script>
-  <script src="js/nav.js?v=20260924"></script>
-  <script src="js/analytics.js?v=20260924"></script>
-  <script src="js/exchange-rate.js?v=20260924"></script>
-  <script src="js/big-three.js?v=20260924"></script>
-  <script src="js/countdown.js?v=20260924"></script>
-  <script src="js/muertos.js?v=20260924"></script>
-  <script src="js/featured-video.js?v=20260924"></script>
-  <script src="js/fiesta.js?v=20260924"></script>
-  <script src="js/halloween.js?v=20260924"></script>
-  <script src="js/moon.js?v=20260924"></script>
-  <script src="js/pong.js?v=20260924"></script>
+  <main id="view-sale" style="display:none;">
+    <a class="back" href="#" id="nav-home-sale">&larr; Back</a>
+    <h1>On Sale</h1>
+    <p class="bio">Cool stuff looking for a new home. Prices in Mexican pesos, open to offers.</p>
+
+    <div class="sale-item">
+      <img id="sale-ka501-main" src="sale/kenwood-ka501-front.jpg" alt="Kenwood KA-501 integrated amplifier, front panel" loading="lazy">
+      <div class="sale-thumbs">
+        <img src="sale/kenwood-ka501-front.jpg" alt="Front view" loading="lazy">
+        <img src="sale/kenwood-ka501-detail.jpg" alt="Close-up of the Kenwood logo and model KA-501" loading="lazy">
+      </div>
+      <h2>Kenwood KA-501 &mdash; High Speed Integrated Amplifier</h2>
+      <p class="sale-price">$9,000 MXN <small>a tratar</small></p>
+      <ul>
+        <li>Vintage late-&rsquo;70s Kenwood in brushed silver</li>
+        <li>Dual peak power meters (left / right)</li>
+        <li>Phono, tuner &amp; aux inputs, plus tape A/B monitor</li>
+        <li>Speakers A / B / A+B, headphone jack</li>
+        <li>Loudness, subsonic filter and Power Amp Direct switches</li>
+      </ul>
+      <a class="contact-link" href="https://wa.me/525543401033?text=Hola%2C%20me%20interesa%20el%20amplificador%20Kenwood%20KA-501" target="_blank" rel="noopener" data-track="sale-ka501-whatsapp">Ask on WhatsApp</a>
+    </div>
+
+    <footer>&copy; 2026 Guido Rico</footer>
+  </main>
+
+  <script src="js/background.js?v=20260928"></script>
+  <script src="js/nav.js?v=20260928"></script>
+  <script src="js/analytics.js?v=20260928"></script>
+  <script src="js/exchange-rate.js?v=20260928"></script>
+  <script src="js/big-three.js?v=20260928"></script>
+  <script src="js/countdown.js?v=20260928"></script>
+  <script src="js/muertos.js?v=20260928"></script>
+  <script src="js/featured-video.js?v=20260928"></script>
+  <script src="js/fiesta.js?v=20260928"></script>
+  <script src="js/halloween.js?v=20260928"></script>
+  <script src="js/moon.js?v=20260928"></script>
+  <script src="js/pong.js?v=20260928"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5f05ab2571b04236b0832d2d870cec49"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
