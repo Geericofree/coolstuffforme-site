@@ -767,6 +767,49 @@
   .sale-price small { font-size: 0.85rem; font-weight: 400; color: var(--muted); }
   .sale-item ul { color: var(--muted); padding-left: 1.2rem; margin: 0.6rem 0 1rem; }
   .sale-item a.contact-link { display: inline-block; }
+  /* ---- Hot "On Sale" promo button ---- */
+  a.contact-link.hot-sale {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.02rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(80, 0, 0, 0.7);
+    border: 1px solid #ffb703;
+    background: linear-gradient(90deg, #d00000, #ff5400, #ffb703, #ff5400, #d00000);
+    background-size: 300% 100%;
+    animation: fire-flow 3s linear infinite, fire-glow 1.2s ease-in-out infinite alternate;
+  }
+  a.contact-link.hot-sale:hover {
+    border-color: #ffd60a;
+    background: linear-gradient(90deg, #d00000, #ff5400, #ffb703, #ff5400, #d00000);
+    background-size: 300% 100%;
+    transform: scale(1.03);
+  }
+  a.contact-link.hot-sale .flame { display: inline-block; animation: flame-flicker 0.6s ease-in-out infinite alternate; }
+  a.contact-link.hot-sale .flame:last-child { animation-delay: 0.3s; }
+  a.contact-link.hot-sale small {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    opacity: 0.95;
+  }
+  @keyframes fire-flow { to { background-position: 300% 0; } }
+  @keyframes fire-glow {
+    from { box-shadow: 0 0 8px rgba(255, 84, 0, 0.55), 0 0 18px rgba(208, 0, 0, 0.35); }
+    to   { box-shadow: 0 0 16px rgba(255, 183, 3, 0.85), 0 0 34px rgba(255, 84, 0, 0.6); }
+  }
+  @keyframes flame-flicker {
+    from { transform: scale(1) rotate(-6deg); }
+    to   { transform: scale(1.25) rotate(6deg) translateY(-2px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    a.contact-link.hot-sale, a.contact-link.hot-sale .flame { animation: none; }
+  }
 </style>
 </head>
 <body>
@@ -776,6 +819,7 @@
     <h1>Guido Rico</h1>
     <p class="bio">Working at the intersection of finance and technology.</p>
     <div class="contact">
+      <a class="contact-link hot-sale" href="#sale" id="nav-sale" data-track="nav-sale"><span class="flame" aria-hidden="true">&#128293;</span> On Sale <span class="flame" aria-hidden="true">&#128293;</span><small>Kenwood amp &amp; GTX 1050 Ti &mdash; a tratar</small></a>
       <a class="contact-link" href="mailto:guidorico@icloud.com" data-track="contact-email">guidorico@icloud.com</a>
       <a class="contact-link" href="https://www.linkedin.com/in/gricomndz/" target="_blank" rel="noopener" data-track="contact-linkedin">LinkedIn</a>
       <a class="contact-link" href="https://profile.indeed.com/p/guidoricom-4yrz861" target="_blank" rel="noopener" data-track="contact-indeed">Indeed</a>
@@ -785,7 +829,6 @@
       <a class="contact-link" href="#photos" id="nav-photos">Photos</a>
       <a class="contact-link" href="#game" id="nav-game">Mini Game &mdash; Pong</a>
       <a class="contact-link" href="#propaganda" id="nav-propaganda" data-track="nav-propaganda">Propaganda Posters</a>
-      <a class="contact-link" href="#sale" id="nav-sale" data-track="nav-sale">On Sale</a>
     </div>
 
     <div class="sponsor">
