@@ -12,7 +12,9 @@
       var fmt = function (n) {
         return Math.round(n).toLocaleString('en-US');
       };
-      el.textContent = 'Dow ' + fmt(data.dow) + ' · S&P 500 ' + fmt(data.sp500) + ' · Nasdaq ' + fmt(data.nasdaq);
+      var text = 'Dow ' + fmt(data.dow) + ' · S&P 500 ' + fmt(data.sp500) + ' · Nasdaq ' + fmt(data.nasdaq);
+      if (data.eustx50 != null) text += ' · Euro Stoxx 50 ' + fmt(data.eustx50);
+      el.textContent = text;
     })
     .catch(function () {
       // Leave the button as-is if the rates can't be fetched.
