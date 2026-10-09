@@ -15,7 +15,7 @@ const CSP = [
   "img-src 'self' data: https://visitor-badge.laobi.icu https://i.ytimg.com",
   "frame-src https://utteranc.es https://www.youtube.com https://www.youtube-nocookie.com",
   "font-src 'self'",
-  "connect-src 'self' https://api.frankfurter.dev https://cloudflareinsights.com",
+  "connect-src 'self' https://api.frankfurter.dev https://cloudflareinsights.com https://etoro-readonly-mcp.guidorico.workers.dev",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
