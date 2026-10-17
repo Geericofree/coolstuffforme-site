@@ -13,7 +13,7 @@
         return Math.round(n).toLocaleString('en-US');
       };
       var text = 'Dow ' + fmt(data.dow) + ' · S&P 500 ' + fmt(data.sp500) + ' · Nasdaq ' + fmt(data.nasdaq);
-      if (data.eustx50 != null) text += ' · Euro Stoxx 50 ' + fmt(data.eustx50);
+      if (data.ftse100 != null) text += ' · FTSE 100 ' + fmt(data.ftse100);
       el.textContent = text;
     })
     .catch(function () {
