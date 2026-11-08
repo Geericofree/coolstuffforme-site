@@ -767,6 +767,21 @@
   .sale-price small { font-size: 0.85rem; font-weight: 400; color: var(--muted); }
   .sale-item ul { color: var(--muted); padding-left: 1.2rem; margin: 0.6rem 0 1rem; }
   .sale-item a.contact-link { display: inline-block; }
+  .sale-item.sold img { filter: grayscale(0.6); opacity: 0.75; }
+  .sale-item.sold .sale-price s { color: var(--muted); }
+  .sold-badge {
+    display: inline-block;
+    margin-left: 0.4rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    background: #d00000;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    vertical-align: middle;
+  }
+  .sold-note { color: var(--muted); font-style: italic; margin: 0 0 0.5rem; }
   /* ---- Hot "On Sale" promo button ---- */
   a.contact-link.hot-sale {
     position: relative;
@@ -819,7 +834,7 @@
     <h1>Guido Rico</h1>
     <p class="bio">Working at the intersection of finance and technology.</p>
     <div class="contact">
-      <a class="contact-link hot-sale" href="#sale" id="nav-sale" data-track="nav-sale"><span class="flame" aria-hidden="true">&#128293;</span> On Sale <span class="flame" aria-hidden="true">&#128293;</span><small>Kenwood amp &amp; GTX 1050 Ti &mdash; a tratar</small></a>
+      <a class="contact-link hot-sale" href="#sale" id="nav-sale" data-track="nav-sale"><span class="flame" aria-hidden="true">&#128293;</span> On Sale <span class="flame" aria-hidden="true">&#128293;</span><small>Kenwood amp<span data-hide-after="2026-12-08"> &amp; GTX 1050 Ti (sold)</span> &mdash; a tratar</small></a>
       <a class="contact-link" href="mailto:guidorico@icloud.com" data-track="contact-email">guidorico@icloud.com</a>
       <a class="contact-link" href="https://www.linkedin.com/in/gricomndz/" target="_blank" rel="noopener" data-track="contact-linkedin">LinkedIn</a>
       <a class="contact-link" href="https://profile.indeed.com/p/guidoricom-4yrz861" target="_blank" rel="noopener" data-track="contact-indeed">Indeed</a>
@@ -1078,20 +1093,21 @@
       <a class="contact-link" href="https://wa.me/525543401033?text=Hola%2C%20me%20interesa%20el%20amplificador%20Kenwood%20KA-501" target="_blank" rel="noopener" data-track="sale-ka501-whatsapp">Ask on WhatsApp</a>
     </div>
 
-    <div class="sale-item">
+    <!-- Sold 2026-11-08; js/sale-expiry.js hides it from 2026-12-08 on. -->
+    <div class="sale-item sold" data-hide-after="2026-12-08">
       <img src="sale/gtx1050ti-ports.jpg" alt="GTX 1050 Ti graphics card, dual-fan cooler and output ports" loading="lazy">
       <div class="sale-thumbs">
         <img src="sale/gtx1050ti-ports.jpg" alt="Card with HDMI, DVI and VGA outputs" loading="lazy">
         <img src="sale/gtx1050ti-label.jpg" alt="Back label: GTX1050Ti 4GB DDR5 128BIT PCI-E" loading="lazy">
       </div>
-      <h2>GTX 1050 Ti &mdash; 4GB Graphics Card</h2>
-      <p class="sale-price">$1,500 MXN <small>a tratar</small></p>
+      <h2>GTX 1050 Ti &mdash; 4GB Graphics Card <span class="sold-badge">SOLD</span></h2>
+      <p class="sale-price"><s>$1,500 MXN</s> <small>&iexcl;Vendida!</small></p>
       <ul>
         <li>4GB GDDR5, 128-bit, PCI Express</li>
         <li>Dual-fan cooler</li>
         <li>HDMI, DVI and VGA outputs</li>
       </ul>
-      <a class="contact-link" href="https://wa.me/525543401033?text=Hola%2C%20me%20interesa%20la%20tarjeta%20de%20video%20GTX%201050%20Ti" target="_blank" rel="noopener" data-track="sale-gtx1050ti-whatsapp">Ask on WhatsApp</a>
+      <p class="sold-note">This one found a new home. Thanks!</p>
     </div>
 
     <footer>&copy; 2026 Guido Rico</footer>
@@ -1109,6 +1125,7 @@
   <script src="js/halloween.js?v=20260928"></script>
   <script src="js/moon.js?v=20260928"></script>
   <script src="js/pong.js?v=20260928"></script>
+  <script src="js/sale-expiry.js?v=20261108"></script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5f05ab2571b04236b0832d2d870cec49"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
