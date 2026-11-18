@@ -4,7 +4,8 @@
     photos: document.getElementById('view-photos'),
     game: document.getElementById('view-game'),
     propaganda: document.getElementById('view-propaganda'),
-    sale: document.getElementById('view-sale')
+    sale: document.getElementById('view-sale'),
+    mezcal: document.getElementById('view-mezcal')
   };
   var navPhotos = document.getElementById('nav-photos');
   var navGame = document.getElementById('nav-game');
@@ -14,6 +15,9 @@
   var navHomePropaganda = document.getElementById('nav-home-propaganda');
   var navSale = document.getElementById('nav-sale');
   var navHomeSale = document.getElementById('nav-home-sale');
+  var navMezcal = document.getElementById('nav-mezcal');
+  var navHomeMezcal = document.getElementById('nav-home-mezcal');
+  var mezcalVideo = document.getElementById('mezcal-video');
 
   var mainVideo = document.getElementById('featured-video-iframe');
   var photosVideo = document.getElementById('photos-video-iframe');
@@ -72,6 +76,7 @@
       }
     }
     syncVideos(name);
+    if (mezcalVideo && name !== 'mezcal') mezcalVideo.pause();
   }
 
   navPhotos.addEventListener('click', function (e) {
@@ -108,6 +113,15 @@
     show('home');
   });
 
+  navMezcal.addEventListener('click', function (e) {
+    e.preventDefault();
+    show('mezcal');
+  });
+  navHomeMezcal.addEventListener('click', function (e) {
+    e.preventDefault();
+    show('home');
+  });
+
   // Clicking a sale thumbnail swaps it into the main photo slot.
   document.querySelectorAll('.sale-item').forEach(function (item) {
     var main = item.querySelector(':scope > img');
@@ -128,13 +142,15 @@
       show('propaganda');
     } else if (location.hash === '#sale') {
       show('sale');
+    } else if (location.hash === '#mezcal') {
+      show('mezcal');
     } else {
       show('home');
     }
   }
   window.addEventListener('popstate', syncToHash);
   window.addEventListener('hashchange', syncToHash);
-  if (location.hash === '#photos' || location.hash === '#game' || location.hash === '#propaganda' || location.hash === '#sale') {
+  if (location.hash === '#photos' || location.hash === '#game' || location.hash === '#propaganda' || location.hash === '#sale' || location.hash === '#mezcal') {
     syncToHash();
   }
 })();
