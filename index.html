@@ -782,6 +782,32 @@
     vertical-align: middle;
   }
   .sold-note { color: var(--muted); font-style: italic; margin: 0 0 0.5rem; }
+  /* ---- Mezcal ---- */
+  a.contact-link.mezcal-link {
+    font-weight: 700;
+    border-color: #b8742a;
+    background: linear-gradient(90deg, rgba(184, 116, 42, 0.22), rgba(184, 116, 42, 0.06));
+  }
+  a.contact-link.mezcal-link:hover { border-color: #d98b35; background: rgba(184, 116, 42, 0.28); }
+  a.contact-link.mezcal-link small { display: block; margin-top: 0.15rem; font-size: 0.75rem; font-weight: 400; color: var(--muted); }
+  .mezcal-video {
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #000;
+  }
+  a.contact-link.whatsapp-cta {
+    display: block;
+    margin: 1.25rem 0 0;
+    font-weight: 700;
+    color: #fff;
+    background: #1fa855;
+    border-color: #1fa855;
+  }
+  a.contact-link.whatsapp-cta:hover { background: #25d366; border-color: #25d366; }
+  .sale-item a.contact-link.whatsapp-cta { display: block; text-align: center; }
+  .mezcal-note { color: var(--muted); font-size: 0.82rem; margin: 1.5rem 0 0; }
   /* ---- Hot "On Sale" promo button ---- */
   a.contact-link.hot-sale {
     position: relative;
@@ -835,6 +861,7 @@
     <p class="bio">Working at the intersection of finance and technology.</p>
     <div class="contact">
       <a class="contact-link hot-sale" href="#sale" id="nav-sale" data-track="nav-sale"><span class="flame" aria-hidden="true">&#128293;</span> On Sale <span class="flame" aria-hidden="true">&#128293;</span><small>Kenwood amp<span data-hide-after="2026-12-08"> &amp; GTX 1050 Ti (sold)</span> &mdash; a tratar</small></a>
+      <a class="contact-link mezcal-link" href="#mezcal" id="nav-mezcal" data-track="nav-mezcal">&#129347; Mezcal &mdash; De Barro<small>Ancestral, Oaxaca &middot; Barril &amp; Tobal&aacute; &middot; $1,250 MXN</small></a>
       <a class="contact-link" href="mailto:guidorico@icloud.com" data-track="contact-email">guidorico@icloud.com</a>
       <a class="contact-link" href="https://www.linkedin.com/in/gricomndz/" target="_blank" rel="noopener" data-track="contact-linkedin">LinkedIn</a>
       <a class="contact-link" href="https://profile.indeed.com/p/guidoricom-4yrz861" target="_blank" rel="noopener" data-track="contact-indeed">Indeed</a>
@@ -1113,8 +1140,47 @@
     <footer>&copy; 2026 Guido Rico</footer>
   </main>
 
+  <main id="view-mezcal" style="display:none;">
+    <a class="back" href="#" id="nav-home-mezcal">&larr; Back</a>
+    <h1>Mezcal</h1>
+    <p class="bio">De Barro &mdash; mezcal ancestral de Villa Sola de Vega, Oaxaca. Calidad premium, 100% agave.</p>
+
+    <video class="mezcal-video" id="mezcal-video" src="mezcal/de-barro-promo.mp4" poster="mezcal/de-barro-poster.jpg" controls playsinline preload="none"></video>
+
+    <div class="sale-item">
+      <img src="mezcal/de-barro-barril.jpg" alt="Ficha de Mezcal De Barro, agave Barril" loading="lazy">
+      <h2>Mezcal De Barro &mdash; Barril</h2>
+      <p class="sale-price">$1,250 MXN <small>botella 750 mL</small></p>
+      <ul>
+        <li>Mezcal joven ancestral, 100% agave Barril</li>
+        <li>Villa Sola de Vega, Oaxaca &middot; 48% Alc. Vol.</li>
+        <li>Transparente, denso y aceitoso; notas herbales y almendradas, dulce-ahumado</li>
+        <li>Producci&oacute;n 2020</li>
+      </ul>
+      <a class="contact-link whatsapp-cta" href="https://wa.me/525543401033?text=Hola%2C%20me%20interesa%20el%20Mezcal%20De%20Barro%20Barril" target="_blank" rel="noopener" data-track="mezcal-barril-whatsapp">Pedir por WhatsApp</a>
+    </div>
+
+    <div class="sale-item">
+      <img src="mezcal/de-barro-tobala.jpg" alt="Ficha de Mezcal De Barro, agave Tobal&aacute;" loading="lazy">
+      <h2>Mezcal De Barro &mdash; Tobal&aacute;</h2>
+      <p class="sale-price">$1,250 MXN <small>botella 750 mL</small></p>
+      <ul>
+        <li>Mezcal joven ancestral, 100% agave Tobal&aacute;</li>
+        <li>Villa Sola de Vega, Oaxaca &middot; 48% Alc. Vol.</li>
+        <li>Transparente, denso y aceitoso; notas herbales y almendradas, dulce-ahumado</li>
+        <li>Producci&oacute;n 2020 y 2026, madurado en vidrio</li>
+      </ul>
+      <a class="contact-link whatsapp-cta" href="https://wa.me/525543401033?text=Hola%2C%20me%20interesa%20el%20Mezcal%20De%20Barro%20Tobal%C3%A1" target="_blank" rel="noopener" data-track="mezcal-tobala-whatsapp">Pedir por WhatsApp</a>
+    </div>
+
+    <a class="contact-link whatsapp-cta" href="https://wa.me/525543401033?text=Hola%2C%20me%20interesa%20el%20Mezcal%20De%20Barro" target="_blank" rel="noopener" data-track="mezcal-whatsapp">WhatsApp: +52 55 4340 1033</a>
+    <p class="mezcal-note">Se aceptan pagos con tarjeta de d&eacute;bito y cr&eacute;dito. Venta solo a mayores de 18 a&ntilde;os.</p>
+
+    <footer>&copy; 2026 Guido Rico</footer>
+  </main>
+
   <script src="js/background.js?v=20260928"></script>
-  <script src="js/nav.js?v=20260928"></script>
+  <script src="js/nav.js?v=20261118"></script>
   <script src="js/analytics.js?v=20260928"></script>
   <script src="js/exchange-rate.js?v=20260928"></script>
   <script src="js/big-three.js?v=20261017"></script>
